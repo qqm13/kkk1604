@@ -4,8 +4,14 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:kkk1604.View"
+        xmlns:ViewModel="clr-namespace:kkk1604.ViewModel"
         mc:Ignorable="d"
+         DataContext="{DynamicResource vm}"
         Title="MainWindow" Height="500" Width="700">
+    <Window.Resources>
+        <ViewModel:MainVM x:Key="vm"/>
+    </Window.Resources>
+    
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -20,7 +26,7 @@
 
         <StackPanel Grid.Column="1">
             <TextBlock Text="Выберите опцию" HorizontalAlignment="Center" FontSize="14" Margin="0 45 0 0"/>
-            <Button Height="70" Width="140" Margin="0 10 0 0">
+            <Button Height="70" Width="140" Margin="0 10 0 0" Command="{Binding OpenPriceTest}">
                 <TextBlock Text="Расчитать цену события" FontSize="15" TextWrapping="Wrap" MaxWidth="100" TextAlignment="Center"/>
             </Button>
         </StackPanel>
@@ -53,10 +59,10 @@
         </StackPanel>
 
         <StackPanel Grid.Row="2" Grid.Column="1">
-            <Button Height="70" Width="140" Margin="0 30 0 0">
+            <Button Height="70" Width="140" Margin="0 30 0 0" Command="{Binding OpenEventMenu}">
                 <TextBlock Text="Меню событий" FontSize="15" TextWrapping="Wrap" MaxWidth="130" TextAlignment="Center"/>
             </Button>
-            <Button Height="40" Width="70" Margin="0 17 0 0" Background="DarkGray">
+            <Button Height="40" Width="70" Margin="0 17 0 0" Background="DarkGray" Command="{Binding OpenRepertoire}">
                 <TextBlock Text="Репертуар" FontSize="12" TextWrapping="Wrap" MaxWidth="130" TextAlignment="Center" Foreground="White"/>
             </Button>
         </StackPanel>

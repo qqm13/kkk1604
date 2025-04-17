@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:kkk1604.View"
         mc:Ignorable="d"
-        Title="EditEvent" Height="470" Width="880">
+        Title="EditEvent" Height="490" Width="880">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>

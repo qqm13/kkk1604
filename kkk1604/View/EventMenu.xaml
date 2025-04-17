@@ -4,8 +4,15 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:kkk1604.View"
+        xmlns:ViewModel="clr-namespace:kkk1604.ViewModel"
         mc:Ignorable="d"
+           DataContext="{DynamicResource vm}"
         Title="EventMenu" Height="500" Width="900">
+
+    <Window.Resources>
+        <ViewModel:EventMenuVM x:Key="vm"/>
+    </Window.Resources>
+    
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="650"/>
@@ -41,13 +48,13 @@
         </ListView>
 
         <StackPanel Grid.Column="1">
-            <Button Height="60" Width="140" Margin="0 50 0 0">
+            <Button Height="60" Width="140" Margin="0 50 0 0" Command="{Binding OpenCreateEvent}">
                 <TextBlock Text="Создать" FontSize="15" TextWrapping="Wrap" MaxWidth="100" TextAlignment="Center"/>
             </Button>
         </StackPanel>
 
         <StackPanel Grid.Column="1" Grid.Row="1">
-            <Button Height="60" Width="140" Margin="0 10 0 0">
+            <Button Height="60" Width="140" Margin="0 10 0 0" Command="{Binding OpenEditEvent}">
                 <TextBlock Text="Редактировать" FontSize="15" TextWrapping="Wrap" MaxWidth="110" TextAlignment="Center"/>
             </Button>
         </StackPanel>
