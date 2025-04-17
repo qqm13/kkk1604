@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace kkk1604.Model
 {
-    class Coffin
+    public class Coffin
     {
+
     }
 }

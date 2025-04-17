@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace kkk1604.Model
 {
-    class Place
+    public class Place
     {
+        public int id { get; set; }
+        public string CemetaryAdress { get; set; }
+        public int CemetarySectorNumber { get; set; }
+        public int CemetaryPlotNumber { get; set; }
     }
 }

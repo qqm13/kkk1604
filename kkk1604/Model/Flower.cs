@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace kkk1604.Model
 {
-    class Flower
+    public class Flower
     {
+        public int id {  get; set; }
+        public string Title { get; set; }
+        public int Count {  get; set; }
+        public int Price { get; set; }
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace kkk1604.Model
 {
-    class Material
+    public class Material
     {
     }
 }
