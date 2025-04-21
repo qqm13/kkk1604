@@ -13,5 +13,8 @@ namespace kkk1604.Model
         public int GraveTypeId { get; set; }
         public int CoffinTypeId { get; set; }
         public int Price { get; set; }
+
+        public Grave Grave { get; set; }
+        public Coffin Coffin { get; set; }
     }
 }

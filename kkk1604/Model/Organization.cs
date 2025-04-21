@@ -21,5 +21,9 @@ namespace kkk1604.Model
         public DateOnly Date { get; set; }  
         public int PlaceID { get; set; }
         public int Price { get; set; }
+
+        public Flower Flower { get; set; }
+        public Place Place { get; set; }
+        public DeathPlace DeathPlace { get; set; }
     }
 }

@@ -36,7 +36,7 @@
             <Button Content="Редактировать" Height="40" Width="150" FontSize="16" Margin="10 10 0 0" HorizontalAlignment="Center"/>
         </StackPanel>
 
-        <ListView Grid.Row="1" Grid.Column="1" Grid.RowSpan="2">
+        <ListView Grid.Row="1" Grid.Column="1" Grid.RowSpan="2" ItemsSource="{Binding Sizes}" SelectedItem="{Binding SelectedSize}">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Названние" Width="200"/>

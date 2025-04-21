@@ -8,5 +8,8 @@ namespace kkk1604.Model
 {
     public class Material
     {
+        public int id { get; set; }
+        public string Title { get; set; }
+        public int Price { get; set; }
     }
 }
