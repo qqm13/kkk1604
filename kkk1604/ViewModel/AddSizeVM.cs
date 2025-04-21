@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -11,6 +12,7 @@ namespace kkk1604.ViewModel
     class AddSizeVM : BaseVM
     {
         private ObservableCollection<Size> sizes = new ObservableCollection<Size>();
+        private Size sizeHere = new Size();
 
         public ObservableCollection<Size> Sizes 
         {
@@ -21,7 +23,7 @@ namespace kkk1604.ViewModel
                 Signal();
             }
         }
-        public Size SelectedSize { get; set; }
+        public Size SizeHere { get => sizeHere; set { sizeHere = value; Signal(); } }
 
         public CommandVM UpdateSize { get; set; }
         public CommandVM RemoveSize { get; set; }
@@ -31,6 +33,24 @@ namespace kkk1604.ViewModel
         public AddSizeVM()
         {
             SelectAll();
+
+            UpdateSize = new CommandVM(() =>
+            {
+                SizesDB.GetDb().Update(SizeHere);
+                SelectAll();
+            }, () => SizeHere != null);
+
+            RemoveSize = new CommandVM(() =>
+            {
+                SizesDB.GetDb().Remove(SizeHere);
+                SelectAll();
+            }, () => SizeHere != null);
+
+            AddSize = new CommandVM(() =>
+            {
+                SizesDB.GetDb().Insert(SizeHere);
+                SelectAll();
+            }, () => true);
 
 
         }

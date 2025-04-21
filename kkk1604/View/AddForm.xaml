@@ -4,8 +4,14 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:kkk1604.View"
+         xmlns:ViewModel="clr-namespace:kkk1604.ViewModel"
+         DataContext="{DynamicResource vm}"
         mc:Ignorable="d"
         Title="AddForm" Height="400" Width="670">
+
+    <Window.Resources>
+        <ViewModel:AddFormVM x:Key="vm"/>
+    </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="330"/>
@@ -23,24 +29,24 @@
 
         <StackPanel Grid.Row="1">
             <Label Content="Введите название" FontSize="16"/>
-            <TextBox FontSize="16" Height="40"/>
+            <TextBox FontSize="16" Height="40" Text="{Binding Formhere.Title}"/>
             <Label Content="Введите модификатор цены" FontSize="16"/>
-            <TextBox FontSize="16" Height="40"/>
+            <TextBox FontSize="16" Height="40" Text="{Binding Formhere.PriceModiffier}"/>
         </StackPanel>
 
         <StackPanel Grid.Row="2">
             <StackPanel Orientation="Horizontal">
-                <Button Content="Добавить" Height="40" Width="150" FontSize="16" Margin="10 10 0 0" HorizontalAlignment="Left"/>
-                <Button Content="Удалить" Height="40" Width="150" FontSize="16" Margin="10 10 0 0" HorizontalAlignment="Left"/>
+                <Button Content="Добавить" Height="40" Width="150" FontSize="16" Margin="10 10 0 0" HorizontalAlignment="Left" Command="{Binding AddForm}"/>
+                <Button Content="Удалить" Height="40" Width="150" FontSize="16" Margin="10 10 0 0" HorizontalAlignment="Left" Command="{Binding RemoveForm}"/>
             </StackPanel>
-            <Button Content="Редактировать" Height="40" Width="150" FontSize="16" Margin="10 10 0 0" HorizontalAlignment="Center"/>
+            <Button Content="Редактировать" Height="40" Width="150" FontSize="16" Margin="10 10 0 0" HorizontalAlignment="Center" Command="{Binding UpdateForm}"/>
         </StackPanel>
 
-        <ListView Grid.Row="1" Grid.Column="1" Grid.RowSpan="2">
+        <ListView Grid.Row="1" Grid.Column="1" Grid.RowSpan="2" ItemsSource="{Binding Forms}">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Названние" Width="200"/>
-                    <GridViewColumn Header="Модификатор цены"  Width="140"/>
+                    <GridViewColumn Header="Названние" Width="200" DisplayMemberBinding="{Binding Title}"/>
+                    <GridViewColumn Header="Модификатор цены"  Width="140" DisplayMemberBinding="{Binding PriceModiffier}"/>
                 </GridView>
             </ListView.View>
         </ListView>
