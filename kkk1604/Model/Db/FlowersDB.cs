@@ -6,18 +6,18 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace kkk1604.Model
+namespace kkk1604.Model.Db
 {
-    public class SizesDB
+    public class FlowersDB
     {
         DbConnection connection;
 
-        private SizesDB(DbConnection db)
+        private FlowersDB(DbConnection db)
         {
-            this.connection = db;
+            connection = db;
         }
 
-        public bool Insert(Size size)
+        public bool Insert(Flower flower)
         {
             bool result = false;
             if (connection == null)
@@ -25,10 +25,11 @@ namespace kkk1604.Model
 
             if (connection.OpenConnection())
             {
-                MySqlCommand cmd = connection.CreateCommand("insert into `Sizes` Values (0, @title, @priceModiffier);select LAST_INSERT_ID();");
+                MySqlCommand cmd = connection.CreateCommand("insert into `Flowers` Values (0, @title, @count, @price);select LAST_INSERT_ID();");
 
-                cmd.Parameters.Add(new MySqlParameter("title", size.Title));
-                cmd.Parameters.Add(new MySqlParameter("priceModiffier", size.PriceModiffier));
+                cmd.Parameters.Add(new MySqlParameter("title", flower.Title));
+                cmd.Parameters.Add(new MySqlParameter("count", flower.Count));
+                cmd.Parameters.Add(new MySqlParameter("price", flower.Price));
 
                 try
                 {
@@ -36,7 +37,7 @@ namespace kkk1604.Model
                     if (id > 0)
                     {
                         MessageBox.Show(id.ToString());
-                        size.id = id;
+                        flower.Id = id;
                         result = true;
                     }
                     else
@@ -53,16 +54,16 @@ namespace kkk1604.Model
             return result;
         }
 
-        public List<Size> SelectAll()
+        public List<Flower> SelectAll()
         {
-            List<Size> sizes = new List<Size>();
+            List<Flower> flowers = new List<Flower>();
             if (connection == null)
-                return sizes;
+                return flowers;
 
 
             if (connection.OpenConnection())
             {
-                var command = connection.CreateCommand("select `id`, `Title`, `PriceModiffier` from `Sizes` ");
+                var command = connection.CreateCommand("select `id`, `Title`, `Count`, `Price` from `Flowers` ");
 
                 try
                 {
@@ -73,12 +74,14 @@ namespace kkk1604.Model
                         string title = string.Empty;
                         if (!dr.IsDBNull(1))
                             title = dr.GetString("Title");
-                        int priceModiffier = dr.GetInt32(2);
-                        sizes.Add(new Size
+                        int count = dr.GetInt32(2);
+                        int price = dr.GetInt32(3);
+                        flowers.Add(new Flower
                         {
-                            id = id,
+                            Id = id,
                             Title = title,
-                            PriceModiffier = priceModiffier
+                            Count = count,
+                            Price = price
                         });
                     }
                 }
@@ -88,18 +91,20 @@ namespace kkk1604.Model
                 }
             }
             connection.CloseConnection();
-            return sizes;
+            return flowers;
         }
 
-        public bool Update(Size edit)
+        public bool Update(Flower edit)
         {
             bool result = false;
             if (connection == null)
                 return result; if (connection.OpenConnection())
             {
-                var mc = connection.CreateCommand($"update `Sizes` set `Title`=@title, `PriceModiffier`=@priceModiffier where `id` = {edit.id}");
+                var mc = connection.CreateCommand($"update `Flowers` set `Title`=@title, `Count`=@count, `Price`=@price where `id` = {edit.Id}");
                 mc.Parameters.Add(new MySqlParameter("title", edit.Title));
-                mc.Parameters.Add(new MySqlParameter("priceModiffier", edit.PriceModiffier));
+                mc.Parameters.Add(new MySqlParameter("count", edit.Count));
+                mc.Parameters.Add(new MySqlParameter("price", edit.Price));
+
 
                 try
                 {
@@ -116,7 +121,7 @@ namespace kkk1604.Model
         }
 
 
-        public bool Remove(Size remove)
+        public bool Remove(Flower remove)
         {
             bool result = false;
             if (connection == null)
@@ -124,7 +129,7 @@ namespace kkk1604.Model
 
             if (connection.OpenConnection())
             {
-                var mc = connection.CreateCommand($"delete from `Sizes` where `id` = {remove.id}");
+                var mc = connection.CreateCommand($"delete from `Flowers` where `id` = {remove.Id}");
                 try
                 {
                     mc.ExecuteNonQuery();
@@ -142,11 +147,11 @@ namespace kkk1604.Model
 
 
 
-        static SizesDB db;
-        public static SizesDB GetDb()
+        static FlowersDB db;
+        public static FlowersDB GetDb()
         {
             if (db == null)
-                db = new SizesDB(DbConnection.GetDbConnection());
+                db = new FlowersDB(DbConnection.GetDbConnection());
             return db;
         }
     }

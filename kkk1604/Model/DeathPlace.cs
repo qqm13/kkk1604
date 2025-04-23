@@ -8,7 +8,7 @@ namespace kkk1604.Model
 {
     public class DeathPlace
     {
-        public int id { get; set; }
+        public int Id { get; set; }
         public string Title { get; set; }
         public int GraveTypeId { get; set; }
         public int CoffinTypeId { get; set; }

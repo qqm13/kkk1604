@@ -4,8 +4,15 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:kkk1604.View"
+        xmlns:ViewModel="clr-namespace:kkk1604.ViewModel"
+        DataContext="{DynamicResource vm}"
         mc:Ignorable="d"
         Title="Addplace" Height="500" Width="740">
+
+    <Window.Resources>
+        <ViewModel:AddPlaceVM x:Key="vm"/>
+    </Window.Resources>
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="330"/>
@@ -23,30 +30,30 @@
 
         <StackPanel Grid.Row="1">
             <Label Content="Введите адрес" FontSize="16"/>
-            <TextBox FontSize="16" Height="40"/>
+            <TextBox FontSize="16" Height="40" Text="{Binding PlaceHere.CemetaryAdress}"/>
             <Label Content="Введите номер сектора" FontSize="16"/>
-            <TextBox FontSize="16" Height="40"/>
+            <TextBox FontSize="16" Height="40" Text="{Binding PlaceHere.CemeterySectorNumber}"/>
             <Label Content="Введите номер участка" FontSize="16"/>
-            <TextBox FontSize="16" Height="40"/>
+            <TextBox FontSize="16" Height="40" Text="{Binding PlaceHere.CemeteryPlotNumber}"/>
             <Label Content="Введите цену" FontSize="16"/>
-            <TextBox FontSize="16" Height="40"/>
+            <TextBox FontSize="16" Height="40" Text="{Binding PlaceHere.Price}"/>
         </StackPanel>
 
         <StackPanel Grid.Row="2">
             <StackPanel Orientation="Horizontal">
-                <Button Content="Добавить" Height="40" Width="150" FontSize="16" Margin="10 10 0 0" HorizontalAlignment="Left"/>
-                <Button Content="Удалить" Height="40" Width="150" FontSize="16" Margin="10 10 0 0" HorizontalAlignment="Left"/>
+                <Button Content="Добавить" Height="40" Width="150" FontSize="16" Margin="10 10 0 0" HorizontalAlignment="Left" Command="{Binding AddPlace}"/>
+                <Button Content="Удалить" Height="40" Width="150" FontSize="16" Margin="10 10 0 0" HorizontalAlignment="Left" Command="{Binding RemovePlace}"/>
             </StackPanel>
-            <Button Content="Редактировать" Height="40" Width="150" FontSize="16" Margin="10 10 0 0" HorizontalAlignment="Center"/>
+            <Button Content="Редактировать" Height="40" Width="150" FontSize="16" Margin="10 10 0 0" HorizontalAlignment="Center" Command="{Binding UpdatePlace}"/>
         </StackPanel>
 
-        <ListView Grid.Row="1" Grid.Column="1" Grid.RowSpan="2">
+        <ListView Grid.Row="1" Grid.Column="1" Grid.RowSpan="2" ItemsSource="{Binding Places}" SelectedItem="{Binding PlaceHere}">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Адрес" Width="100"/>
-                    <GridViewColumn Header="Номер сектора"  Width="100"/>
-                    <GridViewColumn Header="Номер участка"  Width="100"/>
-                    <GridViewColumn Header="Цена"  Width="100"/>
+                    <GridViewColumn Header="Адрес" Width="100" DisplayMemberBinding="{Binding CemetaryAdress}"/>
+                    <GridViewColumn Header="Номер сектора"  Width="100" DisplayMemberBinding="{Binding CemeterySectorNumber}"/>
+                    <GridViewColumn Header="Номер участка"  Width="100" DisplayMemberBinding="{Binding CemeteryPlotNumber}"/>
+                    <GridViewColumn Header="Цена"  Width="100" DisplayMemberBinding="{Binding Price}"/>
                 </GridView>
             </ListView.View>
         </ListView>

@@ -6,18 +6,18 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace kkk1604.Model
+namespace kkk1604.Model.Db
 {
-    public class FormsDB
+    public class MaterialsDB
     {
         DbConnection connection;
 
-        private FormsDB(DbConnection db)
+        private MaterialsDB(DbConnection db)
         {
-            this.connection = db;
+            connection = db;
         }
 
-        public bool Insert(Form form)
+        public bool Insert(Material material)
         {
             bool result = false;
             if (connection == null)
@@ -25,10 +25,10 @@ namespace kkk1604.Model
 
             if (connection.OpenConnection())
             {
-                MySqlCommand cmd = connection.CreateCommand("insert into `Forms` Values (0, @title, @priceModiffier);select LAST_INSERT_ID();");
+                MySqlCommand cmd = connection.CreateCommand("insert into `Materials` Values (0, @title, @price);select LAST_INSERT_ID();");
 
-                cmd.Parameters.Add(new MySqlParameter("title", form.Title));
-                cmd.Parameters.Add(new MySqlParameter("priceModiffier", form.PriceModiffier));
+                cmd.Parameters.Add(new MySqlParameter("title", material.Title));
+                cmd.Parameters.Add(new MySqlParameter("price", material.Price));
 
                 try
                 {
@@ -36,7 +36,7 @@ namespace kkk1604.Model
                     if (id > 0)
                     {
                         MessageBox.Show(id.ToString());
-                        form.id = id;
+                        material.Id = id;
                         result = true;
                     }
                     else
@@ -53,16 +53,16 @@ namespace kkk1604.Model
             return result;
         }
 
-        public List<Form> SelectAll()
+        public List<Material> SelectAll()
         {
-            List<Form> forms = new List<Form>();
+            List<Material> materials = new List<Material>();
             if (connection == null)
-                return forms;
+                return materials;
 
 
             if (connection.OpenConnection())
             {
-                var command = connection.CreateCommand("select `id`, `Title`, `PriceModiffier` from `Forms` ");
+                var command = connection.CreateCommand("select `id`, `Title`, `Price` from `Materials` ");
 
                 try
                 {
@@ -73,12 +73,13 @@ namespace kkk1604.Model
                         string title = string.Empty;
                         if (!dr.IsDBNull(1))
                             title = dr.GetString("Title");
-                        int priceModiffier = dr.GetInt32(2);
-                        forms.Add(new Form
+                        int price = dr.GetInt32(2);
+                        materials.Add(new Material
                         {
-                            id = id,
+                            Id = id,
                             Title = title,
-                            PriceModiffier = priceModiffier
+                            Price = price,
+
                         });
                     }
                 }
@@ -88,18 +89,18 @@ namespace kkk1604.Model
                 }
             }
             connection.CloseConnection();
-            return forms;
+            return materials;
         }
 
-        public bool Update(Form edit)
+        public bool Update(Material edit)
         {
             bool result = false;
             if (connection == null)
                 return result; if (connection.OpenConnection())
             {
-                var mc = connection.CreateCommand($"update `Forms` set `Title`=@title, `PriceModiffier`=@priceModiffier where `id` = {edit.id}");
+                var mc = connection.CreateCommand($"update `Materials` set `Title`=@title, `Price`=@price where `id` = {edit.Id}");
                 mc.Parameters.Add(new MySqlParameter("title", edit.Title));
-                mc.Parameters.Add(new MySqlParameter("priceModiffier", edit.PriceModiffier));
+                mc.Parameters.Add(new MySqlParameter("price", edit.Price));
 
                 try
                 {
@@ -116,7 +117,7 @@ namespace kkk1604.Model
         }
 
 
-        public bool Remove(Form remove)
+        public bool Remove(Material remove)
         {
             bool result = false;
             if (connection == null)
@@ -124,7 +125,7 @@ namespace kkk1604.Model
 
             if (connection.OpenConnection())
             {
-                var mc = connection.CreateCommand($"delete from `Forms` where `id` = {remove.id}");
+                var mc = connection.CreateCommand($"delete from `Materials` where `id` = {remove.Id}");
                 try
                 {
                     mc.ExecuteNonQuery();
@@ -142,11 +143,11 @@ namespace kkk1604.Model
 
 
 
-        static FormsDB db;
-        public static FormsDB GetDb()
+        static MaterialsDB db;
+        public static MaterialsDB GetDb()
         {
             if (db == null)
-                db = new FormsDB(DbConnection.GetDbConnection());
+                db = new MaterialsDB(DbConnection.GetDbConnection());
             return db;
         }
     }

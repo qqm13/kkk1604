@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace kkk1604.Model
+namespace kkk1604.Model.Db
 {
     public class DbConnection
     {
@@ -17,7 +17,7 @@ namespace kkk1604.Model
             MySqlConnectionStringBuilder sb = new MySqlConnectionStringBuilder();
             sb.UserID = "student";
             sb.Password = "student";
-            sb.Server = "95.154.107.102";
+            sb.Server = "192.168.200.13";
             sb.Database = "Kirillov1125_kursovaya";
             sb.CharacterSet = "utf8mb4";
 

@@ -8,9 +8,10 @@ namespace kkk1604.Model
 {
     public class Place
     {
-        public int id { get; set; }
+        public int Id { get; set; }
         public string CemetaryAdress { get; set; }
-        public int CemetarySectorNumber { get; set; }
-        public int CemetaryPlotNumber { get; set; }
+        public int CemeterySectorNumber { get; set; }
+        public int CemeteryPlotNumber { get; set; }
+        public int Price { get; set; }
     }
 }

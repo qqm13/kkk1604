@@ -8,7 +8,7 @@ namespace kkk1604.Model
 {
     public class Flower
     {
-        public int id {  get; set; }
+        public int Id {  get; set; }
         public string Title { get; set; }
         public int Count {  get; set; }
         public int Price { get; set; }

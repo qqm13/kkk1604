@@ -8,7 +8,7 @@ namespace kkk1604.Model
 {
     public class Organization
     {
-        public int id { get; set; } 
+        public int Id { get; set; } 
         public int DeathPlaceId {  get; set; }
         public int GuestCount { get; set; }
         public bool Necrology { get; set; }

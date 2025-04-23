@@ -8,7 +8,7 @@ namespace kkk1604.Model
 {
     public class Grave
     {
-        public int id {  get; set; }
+        public int Id {  get; set; }
         public string Title { get; set; }
         public int FormId { get; set; }
         public int MaterialId { get; set; }
