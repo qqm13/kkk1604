@@ -47,7 +47,7 @@
             <Button Content="Редактировать" Height="40" Width="150" FontSize="16" Margin="10 10 0 0" HorizontalAlignment="Center" Command="{Binding UpdateCoffin}"/>
         </StackPanel>
 
-        <ListView Grid.Row="1" Grid.Column="1" Grid.RowSpan="2" ItemsSource="{Binding Coffins}">
+        <ListView Grid.Row="1" Grid.Column="1" Grid.RowSpan="2" ItemsSource="{Binding Coffins}" SelectedItem="{Binding SelectedCoffin}">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Названние" Width="100" DisplayMemberBinding="{Binding Title}"/>

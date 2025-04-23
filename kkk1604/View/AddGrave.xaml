@@ -29,30 +29,30 @@
 
         <StackPanel Grid.Row="1">
             <Label Content="Введите название" FontSize="16"/>
-            <TextBox FontSize="16" Height="40"/>
+            <TextBox FontSize="16" Height="40" Text="{Binding GraveHere.Title}"/>
             <Label Content="Выберите материал" FontSize="16"/>
-            <ComboBox Height="35" FontSize="16"/>
+            <ComboBox Height="35" FontSize="16" ItemsSource="{Binding Materials}" DisplayMemberPath="Title" SelectedItem="{Binding SelectedMaterial}"/>
             <Label Content="Выберите форму" FontSize="16"/>
-            <ComboBox Height="35" FontSize="16"/>
+            <ComboBox Height="35" FontSize="16" ItemsSource="{Binding Forms}" DisplayMemberPath="Title" SelectedItem="{Binding SelectedForm}"/>
             <Label Content="Цена" FontSize="16"/>
-            <TextBox FontSize="16" Height="40"/>
+            <TextBox FontSize="16" Height="40" IsReadOnly="True" Text="{Binding PriceHere}"/>
         </StackPanel>
 
         <StackPanel Grid.Row="2">
             <StackPanel Orientation="Horizontal">
-                <Button Content="Добавить" Height="40" Width="150" FontSize="16" Margin="10 10 0 0" HorizontalAlignment="Left"/>
-                <Button Content="Удалить" Height="40" Width="150" FontSize="16" Margin="10 10 0 0" HorizontalAlignment="Left"/>
+                <Button Content="Добавить" Height="40" Width="150" FontSize="16" Margin="10 10 0 0" HorizontalAlignment="Left" Command="{Binding AddGrave}"/>
+                <Button Content="Удалить" Height="40" Width="150" FontSize="16" Margin="10 10 0 0" HorizontalAlignment="Left" Command="{Binding RemoveGrave}"/>
             </StackPanel>
-            <Button Content="Редактировать" Height="40" Width="150" FontSize="16" Margin="10 10 0 0" HorizontalAlignment="Center"/>
+            <Button Content="Редактировать" Height="40" Width="150" FontSize="16" Margin="10 10 0 0" HorizontalAlignment="Center" Command="{Binding UpdateGrave}"/>
         </StackPanel>
 
-        <ListView Grid.Row="1" Grid.Column="1" Grid.RowSpan="2">
+        <ListView Grid.Row="1" Grid.Column="1" Grid.RowSpan="2" ItemsSource="{Binding Graves}">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Названние" Width="100"/>
-                    <GridViewColumn Header="Материал"  Width="100"/>
-                    <GridViewColumn Header="Форма"  Width="100"/>
-                    <GridViewColumn Header="Цена"  Width="100"/>
+                    <GridViewColumn Header="Названние" Width="100" DisplayMemberBinding="{Binding Title}"/>
+                    <GridViewColumn Header="Материал"  Width="100" DisplayMemberBinding="{Binding Material.Title}"/>
+                    <GridViewColumn Header="Форма"  Width="100" DisplayMemberBinding="{Binding Form.Title}"/>
+                    <GridViewColumn Header="Цена"  Width="100" DisplayMemberBinding="{Binding Price}"/>
                 </GridView>
             </ListView.View>
         </ListView>
