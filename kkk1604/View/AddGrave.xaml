@@ -4,8 +4,14 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:kkk1604.View"
+        xmlns:ViewModel="clr-namespace:kkk1604.ViewModel"
+        DataContext="{DynamicResource vm}"
         mc:Ignorable="d"
         Title="AddGrave" Height="500" Width="740">
+    <Window.Resources>
+        <ViewModel:AddGraveVM x:Key="vm"/>
+    </Window.Resources>
+    
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="330"/>

@@ -8,16 +8,16 @@ using System.Windows;
 
 namespace kkk1604.Model.Db
 {
-    public class CoffinsDB
+    public class GravesDB
     {
         DbConnection connection;
 
-        private CoffinsDB(DbConnection db)
+        private GravesDB(DbConnection db)
         {
             connection = db;
         }
 
-        public bool Insert(Coffin coffin)
+        public bool Insert(Grave grave)
         {
             bool result = false;
             if (connection == null)
@@ -25,12 +25,12 @@ namespace kkk1604.Model.Db
 
             if (connection.OpenConnection())
             {
-                MySqlCommand cmd = connection.CreateCommand("insert into `CoffinType` Values (0, @title, @materialId, @sizeId, @price);select LAST_INSERT_ID();");
+                MySqlCommand cmd = connection.CreateCommand("insert into `GraveType` Values (0, @title, @formId, @materialId, @price);select LAST_INSERT_ID();");
 
-                cmd.Parameters.Add(new MySqlParameter("title", coffin.Title));
-                cmd.Parameters.Add(new MySqlParameter("materialId", coffin.Material.Id));
-                cmd.Parameters.Add(new MySqlParameter("sizeId", coffin.Size.Id));
-                cmd.Parameters.Add(new MySqlParameter("price", coffin.Price));
+                cmd.Parameters.Add(new MySqlParameter("title", grave.Title));
+                cmd.Parameters.Add(new MySqlParameter("formId", grave.Form.Id));
+                cmd.Parameters.Add(new MySqlParameter("materialId", grave.Material.Id));
+                cmd.Parameters.Add(new MySqlParameter("price", grave.Price));
 
                 try
                 {
@@ -38,7 +38,7 @@ namespace kkk1604.Model.Db
                     if (id > 0)
                     {
                         MessageBox.Show(id.ToString());
-                        coffin.Id = id;
+                        grave.Id = id;
                         result = true;
                     }
                     else
@@ -55,16 +55,16 @@ namespace kkk1604.Model.Db
             return result;
         }
 
-        public List<Coffin> SelectAll()
+        public List<Grave> SelectAll()
         {
-            List<Coffin> coffins = new List<Coffin>();
+            List<Grave> graves = new List<Grave>();
             if (connection == null)
-                return coffins;
+                return graves;
 
 
             if (connection.OpenConnection())
             {
-                var command = connection.CreateCommand("SELECT c.id, c.Title, c.MaterialId, c.SizeId, c.Price,  m.Title, m.Price,s.Title,s.PriceModiffier from `CoffinType` c JOIN Materials m ON c.MaterialId = m.id JOIN Sizes s ON c.SizeId = s.id");
+                var command = connection.CreateCommand("SELECT gt.id, gt.Title, gt.FormId, gt.MaterialId, gt.Price, f.Title, f.PriceModiffier,m.Title, m.Price FROM GraveType gt JOIN Forms f ON gt.FormId = f.id JOIN Materials m ON gt.MaterialId = m.id");
 
                 try
                 {
@@ -75,44 +75,44 @@ namespace kkk1604.Model.Db
                         string title = string.Empty;
                         if (!dr.IsDBNull(1))
                             title = dr.GetString("Title");
-                        int materialId = dr.GetInt32(2);
-                        int sizeId = dr.GetInt32(3);
+                        int formId = dr.GetInt32(2);
+                        int materialId = dr.GetInt32(3);
                         int price = dr.GetInt32(4);
 
-                        string titleMaterial = string.Empty;
+                        string titleForm = string.Empty;
                         if (!dr.IsDBNull(5))
-                            titleMaterial = dr.GetString(5);
-                        int priceMaterial = dr.GetInt32(6);
-                        
-                        string titleSize = string.Empty;
+                            titleForm = dr.GetString(5);
+                        int priceModiffier = dr.GetInt32(6);
+
+                        string titleMaterial = string.Empty;
                         if (!dr.IsDBNull(7))
-                            titleSize = dr.GetString(7);
-                        int priceModiffier = dr.GetInt32(8);
+                            titleMaterial = dr.GetString(7);
+                        int priceMaterial = dr.GetInt32(8);
 
-                        Material coffinMaterial = new Material
+                        Form GraveForm = new Form
                         {
-                            Id = materialId,
-                            Title = titleMaterial,  
-                            Price = priceMaterial
+                          Id = formId,
+                          Title = titleForm,
+                          PriceModiffier = priceModiffier
                         };
 
-                        Size coffinSize = new Size
+                        Material GraveMaterial = new Material
                         {
-                            Id = sizeId,
-                            Title = titleSize,
-                            PriceModiffier = priceModiffier
+                          Id=materialId,
+                          Title = titleMaterial,
+                          Price = priceMaterial
                         };
 
-                        coffins.Add(new Coffin
+                        graves.Add(new Grave
                         {
                             Id = id,
                             Title = title,
+                            FormId = formId,
                             MaterialId = materialId,
-                            SizeId = sizeId,
                             Price = price,
 
-                            Material = coffinMaterial,
-                            Size = coffinSize
+                            Form = GraveForm,
+                            Material = GraveMaterial
                         });
                     }
                 }
@@ -122,19 +122,19 @@ namespace kkk1604.Model.Db
                 }
             }
             connection.CloseConnection();
-            return coffins;
+            return graves;
         }
 
-        public bool Update(Coffin edit)
+        public bool Update(Grave edit)
         {
             bool result = false;
             if (connection == null)
                 return result; if (connection.OpenConnection())
             {
-                var mc = connection.CreateCommand($"update `CoffinType` set `Title`=@title, `MaterialId`=@materialId, `SizeId`=@sizeId, `Price`=@price where `id` = {edit.Id}");
+                var mc = connection.CreateCommand($"update `GraveType` set `Title`=@title, `FormId`=@formId, `MaterialId`=@materialId, `Price`=@price where `id` = {edit.Id}");
                 mc.Parameters.Add(new MySqlParameter("title", edit.Title));
+                mc.Parameters.Add(new MySqlParameter("formId", edit.Form.Id));
                 mc.Parameters.Add(new MySqlParameter("materialId", edit.Material.Id));
-                mc.Parameters.Add(new MySqlParameter("sizeId", edit.Size.Id));
                 mc.Parameters.Add(new MySqlParameter("price", edit.Price));
                 try
                 {
@@ -151,7 +151,7 @@ namespace kkk1604.Model.Db
         }
 
 
-        public bool Remove(Coffin remove)
+        public bool Remove(Grave remove)
         {
             bool result = false;
             if (connection == null)
@@ -159,7 +159,7 @@ namespace kkk1604.Model.Db
 
             if (connection.OpenConnection())
             {
-                var mc = connection.CreateCommand($"delete from `CoffinType` where `id` = {remove.Id}");
+                var mc = connection.CreateCommand($"delete from `GraveType` where `id` = {remove.Id}");
                 try
                 {
                     mc.ExecuteNonQuery();
@@ -177,11 +177,11 @@ namespace kkk1604.Model.Db
 
 
 
-        static CoffinsDB db;
-        public static CoffinsDB GetDb()
+        static GravesDB db;
+        public static GravesDB GetDb()
         {
             if (db == null)
-                db = new CoffinsDB(DbConnection.GetDbConnection());
+                db = new GravesDB(DbConnection.GetDbConnection());
             return db;
         }
     }

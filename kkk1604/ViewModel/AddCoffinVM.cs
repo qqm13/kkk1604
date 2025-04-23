@@ -109,6 +109,11 @@ namespace kkk1604.ViewModel
 
             UpdateCoffin = new CommandVM(() =>
             {
+                CoffinHere.Material = SelectedMaterial;
+                CoffinHere.Size = SelectedSize;
+
+                CoffinHere.Price = PriceHere;
+
                 CoffinsDB.GetDb().Update(CoffinHere);
                 SelectAll();
             }, () => CoffinHere != null);
