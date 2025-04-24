@@ -13,11 +13,19 @@ namespace kkk1604.ViewModel
         public CommandVM OpenPriceTest { get; set; }
         public CommandVM OpenEventMenu { get; set; }
         public CommandVM OpenRepertoire { get; set; }
+        public CommandVM OpenDeathPlace { get; set; }
+        public CommandVM DateCheck { get; set; }
 
         public MainVM()
         {
 
-        OpenPriceTest = new CommandVM(() =>
+        DateCheck = new CommandVM(() =>
+        {
+               
+
+        }, () => true);
+
+            OpenPriceTest = new CommandVM(() =>
         {
             PriceTest priceTest = new PriceTest();
             priceTest.ShowDialog();
@@ -37,6 +45,13 @@ namespace kkk1604.ViewModel
               repertoire.ShowDialog();
 
         }, () => true);
+
+        OpenDeathPlace = new CommandVM(() =>
+        {
+             AddDeathplace addDeathplace = new AddDeathplace();
+            addDeathplace.ShowDialog();
+
+         }, () => true);
 
         }
 

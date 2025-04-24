@@ -62,9 +62,15 @@
             <Button Height="70" Width="140" Margin="0 30 0 0" Command="{Binding OpenEventMenu}">
                 <TextBlock Text="Меню событий" FontSize="15" TextWrapping="Wrap" MaxWidth="130" TextAlignment="Center"/>
             </Button>
-            <Button Height="40" Width="70" Margin="0 17 0 0" Background="DarkGray" Command="{Binding OpenRepertoire}">
-                <TextBlock Text="Репертуар" FontSize="12" TextWrapping="Wrap" MaxWidth="130" TextAlignment="Center" Foreground="White"/>
-            </Button>
+            <StackPanel Orientation="Horizontal">
+                <Button Height="40" Width="70" Margin="41 17 0 0" Background="DarkGray" Command="{Binding OpenRepertoire}">
+                    <TextBlock Text="Репертуар" FontSize="12" TextWrapping="Wrap" MaxWidth="130" TextAlignment="Center" Foreground="White"/>
+                </Button>
+                <Button Height="40" Width="70" Margin="10 17 0 0" Background="DarkGray" Command="{Binding OpenDeathPlace}">
+                    <TextBlock Text="Шаблоны" FontSize="12" TextWrapping="Wrap" MaxWidth="130" TextAlignment="Center" Foreground="White"/>
+                </Button>
+            </StackPanel>
+            
         </StackPanel>
 
     </Grid>

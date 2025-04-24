@@ -72,7 +72,7 @@ namespace kkk1604.Model.Db
                         int id = dr.GetInt32(0);
                         string title = string.Empty;
                         if (!dr.IsDBNull(1))
-                            title = dr.GetString("Title");
+                            title = dr.GetString(1);
                         int price = dr.GetInt32(2);
                         materials.Add(new Material
                         {

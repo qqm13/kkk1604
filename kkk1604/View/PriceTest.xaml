@@ -4,8 +4,14 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:kkk1604.View"
+        xmlns:ViewModel="clr-namespace:kkk1604.ViewModel"
+           DataContext="{DynamicResource vm}"
         mc:Ignorable="d"
         Title="PriceTest" Height="500" Width="700">
+    <Window.Resources>
+        <ViewModel:PriceTestVM x:Key="vm"/>
+    </Window.Resources>
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -24,13 +30,13 @@
 
         <StackPanel Grid.Row="1" Grid.RowSpan="2">
             <Label Content="Введите количество гостей" FontSize="15" Margin="14 0 0 0"/>
-            <TextBox Height="30" Width="200"/>
-            <CheckBox Content="Некролог" Margin="18 7 0 0" FontSize="16"/>
-            <CheckBox Content="Последний ужин" Margin="18 7 0 0" FontSize="16"/>
-            <CheckBox Content="Памятное видео" Margin="18 7 0 0" FontSize="16"/>
-            <CheckBox Content="Автобус для гостей" Margin="18 7 0 0" FontSize="16"/>
-            <CheckBox Content="Катафалк" Margin="18 7 0 0" FontSize="16"/>
-            <CheckBox Content="Священик" Margin="18 7 0 0" FontSize="16"/>
+            <TextBox Height="30" Width="200" Text="{Binding GuestCount}"/>
+            <CheckBox Content="Некролог" Margin="18 7 0 0" FontSize="16" IsChecked="{Binding Necrolog}"/>
+            <CheckBox Content="Последний ужин" Margin="18 7 0 0" FontSize="16" IsChecked="{Binding LastDiner}"/>
+            <CheckBox Content="Памятное видео" Margin="18 7 0 0" FontSize="16" IsChecked="{Binding LastVideo}"/>
+            <CheckBox Content="Автобус для гостей" Margin="18 7 0 0" FontSize="16" IsChecked="{Binding GuestBus}"/>
+            <CheckBox Content="Катафалк" Margin="18 7 0 0" FontSize="16" IsChecked="{Binding Catafalque}"/>
+            <CheckBox Content="Священик" Margin="18 7 0 0" FontSize="16" IsChecked="{Binding Priest}"/>
 
             
         </StackPanel>
@@ -38,25 +44,25 @@
 
         <StackPanel Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center">
             <Label Content="Тип памятника" FontSize="14"/>
-            <ComboBox Width="170" HorizontalAlignment="Left"/>
+            <ComboBox Width="170" HorizontalAlignment="Left" ItemsSource="{Binding Graves}" SelectedItem="{Binding SelectedGrave}" DisplayMemberPath="Title"/>
             <Label Content="Тип гроба" FontSize="14"/>
-            <ComboBox Width="170" HorizontalAlignment="Left"/>
+            <ComboBox Width="170" HorizontalAlignment="Left" ItemsSource="{Binding Coffins}" SelectedItem="{Binding SelectedCoffin}" DisplayMemberPath="Title"/>
             <Label Content="Тип цветов" FontSize="14"/>
-            <ComboBox Width="170" HorizontalAlignment="Left"/>
+            <ComboBox Width="170" HorizontalAlignment="Left" ItemsSource="{Binding Flowers}" SelectedItem="{Binding SelectedFlower}" DisplayMemberPath="Title"/>
         </StackPanel>
 
         <StackPanel Grid.Row="1" Grid.Column="2" HorizontalAlignment="Center" Margin="0 35 0 0">
             <Label Content="Или выберите шаблон" FontSize="14"/>
-            <ComboBox Width="170" HorizontalAlignment="Left"/>
+            <ComboBox Width="170" HorizontalAlignment="Left" ItemsSource="{Binding DeathPlaces}" SelectedItem="{Binding SelectedDeathPlace}" DisplayMemberPath="Title"/>
         </StackPanel>
 
         <StackPanel Grid.Row="2" Orientation="Horizontal" Grid.ColumnSpan="3">
-            <Button Height="70" Width="140" HorizontalAlignment="Center" Margin="250 20 0 0">
+            <Button Height="70" Width="140" HorizontalAlignment="Center" Margin="250 20 0 0" Command="{Binding Calculate}">
                 <TextBlock Text="Расчитать" FontSize="15" TextWrapping="Wrap" MaxWidth="130" TextAlignment="Center"/>
             </Button>
             <StackPanel Margin="10 0 0 0">
                 <Label Content="Финальная цена" FontSize="14" HorizontalAlignment="Center" Margin="0 70 0 0"/>
-                <TextBox Height="45" Width="150" HorizontalAlignment="Center"/>
+                <TextBox Height="45" Width="150" HorizontalAlignment="Center" Text="{Binding TotalPrice}"/>
             </StackPanel>
         </StackPanel>
         

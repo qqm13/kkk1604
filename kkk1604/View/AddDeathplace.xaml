@@ -1,0 +1,65 @@
+﻿<Window x:Class="kkk1604.View.AddDeathplace"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:kkk1604.View"
+         xmlns:ViewModel="clr-namespace:kkk1604.ViewModel"
+        DataContext="{DynamicResource vm}"
+        mc:Ignorable="d"
+        Title="AddDeathplace" Height="530" Width="840">
+    
+    <Window.Resources>
+        <ViewModel:AddDeathPlaceVM x:Key="vm"/>
+    </Window.Resources>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="330"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="350"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <StackPanel>
+                <Label Content="Шаблон" FontSize="16" Margin="15 20 0 0"/>
+            </StackPanel>
+
+            <StackPanel Grid.Row="1">
+                <Label Content="Введите название" FontSize="16"/>
+                <TextBox FontSize="16" Height="40" Text="{Binding DeathPlaceHere.Title}"/>
+                <Label Content="Выберите Цветы" FontSize="16"/>
+                <ComboBox Height="35" FontSize="16" ItemsSource="{Binding Flowers}" DisplayMemberPath="Title" SelectedItem="{Binding SelectedFlower}"/>
+                <Label Content="Выберите Гроб" FontSize="16" />
+                <ComboBox Height="35" FontSize="16" ItemsSource="{Binding Coffins}" DisplayMemberPath="Title" SelectedItem="{Binding SelectedCoffin}"/>
+                <Label Content="Выберите Памятник" FontSize="16" />
+               <ComboBox Height="35" FontSize="16" ItemsSource="{Binding Graves}" DisplayMemberPath="Title" SelectedItem="{Binding SelectedGrave}"/>
+                <Label Content="Цена" FontSize="16"/>
+                <TextBox FontSize="16" Height="40" IsReadOnly="True" Text="{Binding PriceHere}"/>
+            </StackPanel>
+
+            <StackPanel Grid.Row="2">
+                <StackPanel Orientation="Horizontal">
+                    <Button Content="Добавить" Height="40" Width="150" FontSize="16" Margin="10 10 0 0" HorizontalAlignment="Left" Command="{Binding AddDeathPlace}"/>
+                <Button Content="Удалить" Height="40" Width="150" FontSize="16" Margin="10 10 0 0" HorizontalAlignment="Left" Command="{Binding RemoveDeathPlace}"/>
+                </StackPanel>
+            <Button Content="Редактировать" Height="40" Width="150" FontSize="16" Margin="10 10 0 0" HorizontalAlignment="Center" Command="{Binding UpdateDeathPlace}"/>
+            </StackPanel>
+
+            <ListView Grid.Row="1" Grid.Column="1" Grid.RowSpan="2" ItemsSource="{Binding DeathPlaces}">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Названние" Width="100" DisplayMemberBinding="{Binding Title}"/>
+                    <GridViewColumn Header="Цветы"  Width="100" DisplayMemberBinding="{Binding Flower.Title}"/>
+                    <GridViewColumn Header="Гроб"  Width="100" DisplayMemberBinding="{Binding Coffin.Title}"/>
+                    <GridViewColumn Header="Надгробие"  Width="100" DisplayMemberBinding="{Binding Grave.Title}" />
+                    <GridViewColumn Header="Цена"  Width="100" DisplayMemberBinding="{Binding Price}"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+
+        </Grid>
+</Window>
