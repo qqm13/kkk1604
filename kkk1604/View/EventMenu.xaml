@@ -15,7 +15,7 @@
     
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="650"/>
+            <ColumnDefinition Width="720"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
@@ -34,6 +34,9 @@
                     <GridViewColumn Header="Адрес" Width="75"/>
                     <GridViewColumn Header="Статус" Width="100"/>
                     <GridViewColumn Header="Общая цена" Width="100"/>
+                    <GridViewColumn Width="75">
+                        <TextBlock Text="Тип похорон" TextWrapping="Wrap" MaxWidth="70"/>
+                    </GridViewColumn>
                     <GridViewColumn Width="75">
                         <TextBlock Text="Тип памятника" TextWrapping="Wrap" MaxWidth="70"/>
                     </GridViewColumn>
