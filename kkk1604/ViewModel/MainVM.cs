@@ -1,6 +1,7 @@
 ﻿using kkk1604.Model;
 using kkk1604.Model.Db;
 using kkk1604.View;
+using Spire.Xls;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -21,9 +22,13 @@ namespace kkk1604.ViewModel
         public CommandVM OpenRepertoire { get; set; }
         public CommandVM OpenDeathPlace { get; set; }
         public CommandVM DateCheck { get; set; }
+        public CommandVM CreateReport {  get; set; }
 
         public string DateCheckResult { get => dateCheckResult; set { dateCheckResult = value; Signal(); } }
         public DateTime CheckDate { get => checkDate; set { checkDate = value; Signal();} }
+        public DateTime ReportStart {  get; set; }
+        public DateTime ReportEnd { get; set; }
+        public DateTime BaseDate { get; set; } = new DateTime();
 
 
         public MainVM()
@@ -43,7 +48,7 @@ namespace kkk1604.ViewModel
             if (DateCheckResult != "Занято")
                 DateCheckResult = "Свободно";
 
-        }, () => true);
+        }, () => CheckDate != BaseDate);
 
             OpenPriceTest = new CommandVM(() =>
         {
@@ -72,6 +77,17 @@ namespace kkk1604.ViewModel
             addDeathplace.ShowDialog();
 
          }, () => true);
+
+            CreateReport = new CommandVM(() =>
+            {
+                Workbook workbook = new Workbook();
+                Worksheet sheet = workbook.Worksheets[0];
+                sheet.Range["A1"].Text = "Hello,World!";
+                workbook.SaveToFile("C:\\Users\\Max\\source\\repos\\kkk1604\\kkk1604\\Reports\\Sample.xls");
+
+                //делать норм создание очтета летсгоу
+
+            }, () => ReportStart != BaseDate && ReportEnd != BaseDate);
 
         }
 
