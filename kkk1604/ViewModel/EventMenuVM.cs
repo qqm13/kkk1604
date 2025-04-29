@@ -14,15 +14,16 @@ namespace kkk1604.ViewModel
     {
         public CommandVM OpenCreateEvent { get; set; }
         public CommandVM OpenEditEvent { get; set; }
-        Organization SelectedItem { get; set; }
-        ObservableCollection<Organization> Organizations { get; set; } = new ObservableCollection<Organization>();
+        public Organization SelectedItem { get; set; }
+        public ObservableCollection<Organization> Organizations { get; set; } = new ObservableCollection<Organization>();
 
         public EventMenuVM() 
         {
+            SelectAll();
 
         OpenCreateEvent = new CommandVM(() =>
         {
-              CreateEvent createEvent = new CreateEvent();
+              CreateEvent createEvent = new CreateEvent(new Organization());
                 createEvent.ShowDialog();
 
         }, () => true);

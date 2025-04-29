@@ -42,7 +42,6 @@ namespace kkk1604.ViewModel
             }
             if (DateCheckResult != "Занято")
                 DateCheckResult = "Свободно";
-            MessageBox.Show(DateCheckResult);
 
         }, () => true);
 

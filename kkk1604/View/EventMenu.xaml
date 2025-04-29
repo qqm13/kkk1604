@@ -7,7 +7,7 @@
         xmlns:ViewModel="clr-namespace:kkk1604.ViewModel"
         mc:Ignorable="d"
            DataContext="{DynamicResource vm}"
-        Title="EventMenu" Height="500" Width="900">
+        Title="EventMenu" Height="500" Width="1010">
 
     <Window.Resources>
         <ViewModel:EventMenuVM x:Key="vm"/>
@@ -15,7 +15,7 @@
     
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="720"/>
+            <ColumnDefinition Width="auto"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
@@ -27,23 +27,23 @@
         <ListView Grid.RowSpan="3" ItemsSource="{Binding Organizations}">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Width="65">
+                    <GridViewColumn Width="43" DisplayMemberBinding="{Binding GuestCount}">
                         <TextBlock Text="Кол-во гостей" TextWrapping="Wrap" MaxWidth="70"/>
                     </GridViewColumn>
-                    <GridViewColumn Header="Дата" Width="75"/>
-                    <GridViewColumn Header="Адрес" Width="75"/>
-                    <GridViewColumn Header="Статус" Width="100"/>
-                    <GridViewColumn Header="Общая цена" Width="100"/>
-                    <GridViewColumn Width="75">
+                    <GridViewColumn Header="Дата" Width="66" DisplayMemberBinding="{Binding Date}"/>
+                    <GridViewColumn Header="Адрес" Width="100" DisplayMemberBinding="{Binding Place.CemetaryAdress}"/>
+                    <GridViewColumn Header="Статус" Width="100" DisplayMemberBinding="{Binding Status}"/>
+                    <GridViewColumn Header="Общая цена" Width="100" DisplayMemberBinding="{Binding Price}"/>
+                    <GridViewColumn Width="100" DisplayMemberBinding="{Binding DeathPlace.Title}">
                         <TextBlock Text="Тип похорон" TextWrapping="Wrap" MaxWidth="70"/>
                     </GridViewColumn>
-                    <GridViewColumn Width="75">
+                    <GridViewColumn Width="100" DisplayMemberBinding="{Binding DeathPlace.Grave.Title}">
                         <TextBlock Text="Тип памятника" TextWrapping="Wrap" MaxWidth="70"/>
                     </GridViewColumn>
-                    <GridViewColumn Width="75">
-                        <TextBlock Text="Тип гроба" TextWrapping="Wrap" MaxWidth="50"/>
+                    <GridViewColumn Width="100" DisplayMemberBinding="{Binding DeathPlace.Coffin.Title}">
+                        <TextBlock Text="Тип гроба" TextWrapping="Wrap" MaxWidth="50" />
                     </GridViewColumn>
-                    <GridViewColumn Width="75">
+                    <GridViewColumn Width="100" DisplayMemberBinding="{Binding DeathPlace.Flower.Title}">
                         <TextBlock Text="Тип цветов" TextWrapping="Wrap" MaxWidth="70"/>
                     </GridViewColumn>
                 </GridView>

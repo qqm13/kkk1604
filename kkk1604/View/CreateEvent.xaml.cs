@@ -1,4 +1,5 @@
-﻿using System;
+﻿using kkk1604.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,7 +20,7 @@ namespace kkk1604.View
     /// </summary>
     public partial class CreateEvent : Window
     {
-        public CreateEvent()
+        public CreateEvent(Organization organization)
         {
             InitializeComponent();
         }

@@ -124,7 +124,7 @@ namespace kkk1604.Model.Db
                         Coffin organizationCoffin = new Coffin
                         {
                             Id = coffinid,
-                            Title = flowerTitle
+                            Title = coffinTitle
 
                         };
 
@@ -145,6 +145,7 @@ namespace kkk1604.Model.Db
                         DeathPlace organizationDeathPlace = new DeathPlace
                         {
                             Id = deathplaceId,
+                            Title = deathPlaceTitle,
                             CoffinTypeId = coffinid,
                             GraveTypeId = graveId,
                             FlowersId = flowerId,
