@@ -26,8 +26,7 @@ namespace kkk1604.ViewModel
 
         public string DateCheckResult { get => dateCheckResult; set { dateCheckResult = value; Signal(); } }
         public DateTime CheckDate { get => checkDate; set { checkDate = value; Signal();} }
-        public DateTime ReportStart {  get; set; }
-        public DateTime ReportEnd { get; set; }
+        public DateTime Reportdate {  get; set; }
         public DateTime BaseDate { get; set; } = new DateTime();
 
 
@@ -81,17 +80,101 @@ namespace kkk1604.ViewModel
             CreateReport = new CommandVM(() =>
             {
                 Workbook workbook = new Workbook();
-                Worksheet sheet = workbook.Worksheets[0];
-                sheet.Range["A1"].Text = "Hello,World!";
-                workbook.SaveToFile("C:\\Users\\Max\\source\\repos\\kkk1604\\kkk1604\\Reports\\Sample.xls");
+                //1лист
+                Worksheet sheet = workbook.Worksheets[0];                
+                sheet.Range["A1"].Text = "Количество гостей";
+                sheet.Range["A1"].ColumnWidth = 18;
+
+                sheet.Range["B1"].Text = "Дата";
+                sheet.Range["B1"].ColumnWidth = 15;
+
+                sheet.Range["C1"].Text = "Адрес";
+                sheet.Range["C1"].ColumnWidth = 15;
+
+                sheet.Range["D1"].Text = "Статус";
+                sheet.Range["D1"].ColumnWidth = 15;
+
+                sheet.Range["E1"].Text = "Общая цена";
+                sheet.Range["E1"].ColumnWidth = 15;
+
+                sheet.Range["F1"].Text = "Тип организации захоронения";
+                sheet.Range["F1"].ColumnWidth = 15;
+
+                sheet.Range["G1"].Text = "Тип памятника";
+                sheet.Range["G1"].ColumnWidth = 15;
+
+                sheet.Range["H1"].Text = "Тип гроба";
+                sheet.Range["H1"].ColumnWidth = 15;
+
+                sheet.Range["I1"].Text = "Тип цветов";
+                sheet.Range["I1"].ColumnWidth = 15;
+
+                sheet.Range["L1"].Text = "Количество проведенных событий";
+                sheet.Range["L1"].ColumnWidth = 25;
+                sheet.Range["L1"].IsWrapText = true;
+
+                sheet.Range["M1"].Text = "Заработок за все проведенные события"; 
+                sheet.Range["M1"].ColumnWidth = 25;
+                sheet.Range["M1"].IsWrapText = true;
+
+
+                int organizationsForReportCount = 0;
+                int organizationsForReportPrice = 0;
+
+                ObservableCollection<Organization> allorganization =  new ObservableCollection<Organization>(OrganizationsDB.GetDb().SelectAll());
+                ObservableCollection<Organization> organizationsForReport = new ObservableCollection<Organization>();
+                foreach (Organization org in allorganization)
+                {
+                    if (org.Date.Year == Reportdate.Year && org.Date.Month == Reportdate.Month)
+                    {
+                        organizationsForReport.Add(org);
+                    }
+                }
+                for (int i = 0; i < organizationsForReport.Count; i++)
+                {
+                    if (organizationsForReport[i].Date.Year == Reportdate.Year && organizationsForReport[i].Date.Month == Reportdate.Month)
+                    {
+
+                        sheet.Range[$"A{i + 2}"].Text = organizationsForReport[i].GuestCount.ToString();
+                        sheet.Range[$"B{i + 2}"].Text = organizationsForReport[i].Date.ToString();
+                        sheet.Range[$"C{i + 2}"].Text = organizationsForReport[i].Place.CemetaryAdress.ToString();
+                        sheet.Range[$"D{i + 2}"].Text = organizationsForReport[i].Status.ToString();
+                        sheet.Range[$"E{i + 2}"].Text = organizationsForReport[i].Price.ToString();
+                        sheet.Range[$"F{i + 2}"].Text = organizationsForReport[i].DeathPlace.Title.ToString();
+                        sheet.Range[$"G{i + 2}"].Text = organizationsForReport[i].DeathPlace.Grave.Title.ToString();
+                        sheet.Range[$"H{i + 2}"].Text = organizationsForReport[i].DeathPlace.Coffin.Title.ToString();
+                        sheet.Range[$"I{i + 2}"].Text = organizationsForReport[i].DeathPlace.Flower.Title.ToString();
+
+                        if (organizationsForReport[i].Status == true)
+                        {
+                            organizationsForReportCount++;
+                            organizationsForReportPrice += organizationsForReport[i].Price;
+                        }
+                    }
+                }
+
+                sheet.Range["L2"].Text = organizationsForReportCount.ToString();
+                sheet.Range["L2"].ColumnWidth = 25;
+                sheet.Range["L2"].IsWrapText = true;
+
+                sheet.Range["M2"].Text = organizationsForReportPrice.ToString();
+                sheet.Range["M2"].ColumnWidth = 25;
+                sheet.Range["M2"].IsWrapText = true;
+
+
+                workbook.SaveToFile("C:\\Users\\Max\\source\\repos\\kkk1604\\kkk1604\\Reports\\NewReport.xls");
+
+               
+
+
 
                 //делать норм создание очтета летсгоу
-                //основана инфа о соыбтия 1первый лист
-                //количсевто провыеденных событий 1первый лист
-                //общий заработок 1первый лист
+                //основана инфа о соыбтия 1первый лист +
+                //количсевто провыеденных событий 1первый лист +
+                //общий заработок 1первый лист +
                 //кратка инфа о  гробов,памятников,цветов + количество проданных того или иног овида плюс сколько заработали 2втопрой лист
 
-            }, () => ReportStart != BaseDate && ReportEnd != BaseDate);
+            }, () => Reportdate != BaseDate);
 
         }
 

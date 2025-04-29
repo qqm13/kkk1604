@@ -34,8 +34,8 @@
                     <GridViewColumn Header="Адрес" Width="100" DisplayMemberBinding="{Binding Place.CemetaryAdress}"/>
                     <GridViewColumn Header="Статус" Width="100" DisplayMemberBinding="{Binding Status}"/>
                     <GridViewColumn Header="Общая цена" Width="100" DisplayMemberBinding="{Binding Price}"/>
-                    <GridViewColumn Width="100" DisplayMemberBinding="{Binding DeathPlace.Title}">
-                        <TextBlock Text="Тип похорон" TextWrapping="Wrap" MaxWidth="70"/>
+                    <GridViewColumn Width="110" DisplayMemberBinding="{Binding DeathPlace.Title}">
+                        <TextBlock Text="Тип организации захоронения" TextWrapping="Wrap" MaxWidth="100"/>
                     </GridViewColumn>
                     <GridViewColumn Width="100" DisplayMemberBinding="{Binding DeathPlace.Grave.Title}">
                         <TextBlock Text="Тип памятника" TextWrapping="Wrap" MaxWidth="70"/>

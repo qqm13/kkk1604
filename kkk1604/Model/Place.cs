@@ -13,5 +13,7 @@ namespace kkk1604.Model
         public int CemeterySectorNumber { get; set; }
         public int CemeteryPlotNumber { get; set; }
         public int Price { get; set; }
+
+      
     }
 }

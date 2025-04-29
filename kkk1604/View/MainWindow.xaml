@@ -44,8 +44,8 @@
         <StackPanel Grid.Row="1" Grid.RowSpan="2" Grid.Column="1">
             <DatePicker Margin="0 30 0 0" Height="40" FontSize="15" Width="200" SelectedDate="{Binding CheckDate}"/>
 
-            <DatePicker Margin="0 50 0 0" Height="40" FontSize="15" Width="200" SelectedDate="{Binding ReportStart}"/>
-            <Label Content="Дата начала отчета" Margin="15 -5 0 0"/>
+            <DatePicker Margin="0 50 0 0" Height="40" FontSize="15" Width="200" SelectedDate="{Binding Reportdate}"/>
+            <Label Content="Введите месяц и год для отчета" Margin="15 -5 0 0"/>
             
             
         </StackPanel>
@@ -53,9 +53,6 @@
         <StackPanel Grid.RowSpan="2" Grid.Row="1" Grid.Column="2">
             <Label Content="Результат" FontSize="14" Margin="20 0 0 0" />
             <TextBox  Height="40" Width="200" FontSize="15" Text="{Binding DateCheckResult}" IsReadOnly="True"/>
-
-            <DatePicker Margin="0 50 0 0" Height="40" FontSize="15" Width="200" SelectedDate="{Binding ReportEnd}"/>
-            <Label Content="Дата конца отчета" Margin="15 -5 0 0"/>
         </StackPanel>
 
         <StackPanel Grid.Row="2" Grid.Column="1">
