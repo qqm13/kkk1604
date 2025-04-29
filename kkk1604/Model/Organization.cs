@@ -17,9 +17,10 @@ namespace kkk1604.Model
         public bool GuestBus { get; set; }
         public bool Catafalque { get; set; }
         public bool Priest {  get; set; }
-        public DateOnly Date { get; set; }  
+        public DateTime Date { get; set; }  
         public int PlaceId { get; set; }
         public int Price { get; set; }
+        public bool Status { get; set; }
 
         public Place Place { get; set; }
         public DeathPlace DeathPlace { get; set; }

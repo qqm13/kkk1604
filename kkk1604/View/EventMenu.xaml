@@ -24,7 +24,7 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <ListView Grid.RowSpan="3">
+        <ListView Grid.RowSpan="3" ItemsSource="{Binding Organizations}">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Width="65">

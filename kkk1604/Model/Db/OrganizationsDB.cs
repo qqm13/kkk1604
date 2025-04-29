@@ -26,7 +26,7 @@ namespace kkk1604.Model.Db
 
             if (connection.OpenConnection())
             {
-                MySqlCommand cmd = connection.CreateCommand("insert into `Organization` Values (0, @DeathplaceId, @GuestCount, @Necrology, @LastDinner, @LastSlideShow, @GuestBus, @Catafalque, @Priest, @Date, @PlaceId, @Price );select LAST_INSERT_ID();");
+                MySqlCommand cmd = connection.CreateCommand("insert into `Organization` Values (0, @DeathplaceId, @GuestCount, @Necrology, @LastDinner, @LastSlideShow, @GuestBus, @Catafalque, @Priest, @Date, @PlaceId, @Price, @Status );select LAST_INSERT_ID();");
 
                 cmd.Parameters.Add(new MySqlParameter("DeathplaceId", organization.DeathPlaceId));
                 cmd.Parameters.Add(new MySqlParameter("GuestCount", organization.GuestCount));
@@ -39,6 +39,7 @@ namespace kkk1604.Model.Db
                 cmd.Parameters.Add(new MySqlParameter("Date", organization.Date));
                 cmd.Parameters.Add(new MySqlParameter("PlaceId", organization.PlaceId)); 
                 cmd.Parameters.Add(new MySqlParameter("Price", organization.Price));
+                cmd.Parameters.Add(new MySqlParameter("Status", organization.Status));
 
                 try
                 {
@@ -72,7 +73,7 @@ namespace kkk1604.Model.Db
 
             if (connection.OpenConnection())
             {
-                var command = connection.CreateCommand("SELECT o.id, DeathplaceId,GuestCount,Necrology,LastDinner,LastSlideshow,GuestBus,Catafalque,Priest,  date,  PlaceId,  o.Price,  p.CemetaryAdress,  p.CemeterySectorNumber,  p.CemeteryPlotNumber,  dp.Title,  dp.GraveTypeId,  dp.CoffinTypeId,dp.FlowersId,ct.Title,  gt.Title,  f.Title FROM Organization o JOIN Place p ON o.PlaceId = p.id JOIN DeathPlace dp ON o.DeathplaceId = dp.id JOIN CoffinType ct ON dp.CoffinTypeId = ct.id JOIN GraveType gt ON dp.GraveTypeId = gt.id JOIN Flowers f ON dp.FlowersId = f.id");
+                var command = connection.CreateCommand("SELECT o.id, DeathplaceId,GuestCount,Necrology,LastDinner,LastSlideshow,GuestBus,Catafalque,Priest,  date,  PlaceId,  o.Price,  p.CemetaryAdress,  p.CemeterySectorNumber,  p.CemeteryPlotNumber,  dp.Title,  dp.GraveTypeId,  dp.CoffinTypeId,dp.FlowersId,ct.Title,  gt.Title,  f.Title, Status FROM Organization o JOIN Place p ON o.PlaceId = p.id JOIN DeathPlace dp ON o.DeathplaceId = dp.id JOIN CoffinType ct ON dp.CoffinTypeId = ct.id JOIN GraveType gt ON dp.GraveTypeId = gt.id JOIN Flowers f ON dp.FlowersId = f.id");
 
                 try
                 {
@@ -88,8 +89,8 @@ namespace kkk1604.Model.Db
                         bool guestBus = dr.GetBoolean(6);
                         bool catafalque = dr.GetBoolean(7);
                         bool priest = dr.GetBoolean(8);
-                        DateOnly dateEvent = new DateOnly();
-                          dateEvent = dr.GetDateOnly(9);
+                        DateTime dateEvent = new DateTime();
+                          dateEvent = dr.GetDateTime(9);
                         int placeId = dr.GetInt32(10);
                         int price = dr.GetInt32(11);
                         string cemetaryAdress = string.Empty;
@@ -112,7 +113,7 @@ namespace kkk1604.Model.Db
                         string flowerTitle = string.Empty;
                         if (!dr.IsDBNull(21))
                             flowerTitle = dr.GetString(21);
-
+                        bool status = dr.GetBoolean(22);
 
                         Grave organizationGrave = new Grave
                         {
@@ -169,6 +170,7 @@ namespace kkk1604.Model.Db
                             PlaceId = placeId,
                             Place = organizationPlace,
                             Price = price,
+                            Status = status
 
 
                         });
@@ -189,7 +191,7 @@ namespace kkk1604.Model.Db
             if (connection == null)
                 return result; if (connection.OpenConnection())
             {
-                var mc = connection.CreateCommand($"update `Organization` set `DeathplaceId`=@DeathplaceId, `GuestCount`=@GuestCount, `Necrology`=@Necrology, `LastDinner`=@LastDinner, `LastSlideshow`=@LastSlideshow,`GuestBus`=@GuestBus,`Catafalque`=@Catafalque,`Priest`=@Priest,`Date`=@Date,`PlaceId`=@PlaceId, `Price`=@Price where `id` = {edit.Id}");
+                var mc = connection.CreateCommand($"update `Organization` set `DeathplaceId`=@DeathplaceId, `GuestCount`=@GuestCount, `Necrology`=@Necrology, `LastDinner`=@LastDinner, `LastSlideshow`=@LastSlideshow,`GuestBus`=@GuestBus,`Catafalque`=@Catafalque,`Priest`=@Priest,`Date`=@Date,`PlaceId`=@PlaceId, `Price`=@Price, `Status`=@Status where `id` = {edit.Id}");
                 mc.Parameters.Add(new MySqlParameter("DeathplaceId", edit.DeathPlace.Id));
                 mc.Parameters.Add(new MySqlParameter("GuestCount", edit.GuestCount));
                 mc.Parameters.Add(new MySqlParameter("Necrology", edit.Necrology));
@@ -201,6 +203,7 @@ namespace kkk1604.Model.Db
                 mc.Parameters.Add(new MySqlParameter("Date", edit.Date));
                 mc.Parameters.Add(new MySqlParameter("PlaceId", edit.Place.Id));
                 mc.Parameters.Add(new MySqlParameter("Price", edit.Price));
+                mc.Parameters.Add(new MySqlParameter("Status", edit.Status));
 
 
 

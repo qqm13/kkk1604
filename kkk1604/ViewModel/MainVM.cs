@@ -1,6 +1,9 @@
-﻿using kkk1604.View;
+﻿using kkk1604.Model;
+using kkk1604.Model.Db;
+using kkk1604.View;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,18 +13,36 @@ namespace kkk1604.ViewModel
 {
     class MainVM : BaseVM
     {
+        private string dateCheckResult;
+        private DateTime checkDate;
+
         public CommandVM OpenPriceTest { get; set; }
         public CommandVM OpenEventMenu { get; set; }
         public CommandVM OpenRepertoire { get; set; }
         public CommandVM OpenDeathPlace { get; set; }
         public CommandVM DateCheck { get; set; }
 
+        public string DateCheckResult { get => dateCheckResult; set { dateCheckResult = value; Signal(); } }
+        public DateTime CheckDate { get => checkDate; set { checkDate = value; Signal();} }
+
+
         public MainVM()
         {
 
         DateCheck = new CommandVM(() =>
         {
-               
+            DateCheckResult = " ";
+             ObservableCollection<Organization> list = new ObservableCollection<Organization>(OrganizationsDB.GetDb().SelectAll());
+            foreach (Organization o in list)
+            {
+                if(o.Date.Year == CheckDate.Year && o.Date.Month == CheckDate.Month && o.Date.Day == CheckDate.Day)
+                {
+                    DateCheckResult = "Занято";
+                }
+            }
+            if (DateCheckResult != "Занято")
+                DateCheckResult = "Свободно";
+            MessageBox.Show(DateCheckResult);
 
         }, () => true);
 

@@ -1,7 +1,9 @@
 ﻿using kkk1604.Model;
+using kkk1604.Model.Db;
 using kkk1604.View;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,7 +14,8 @@ namespace kkk1604.ViewModel
     {
         public CommandVM OpenCreateEvent { get; set; }
         public CommandVM OpenEditEvent { get; set; }
-        Funeral SelectedItem { get; set; }
+        Organization SelectedItem { get; set; }
+        ObservableCollection<Organization> Organizations { get; set; } = new ObservableCollection<Organization>();
 
         public EventMenuVM() 
         {
@@ -30,8 +33,12 @@ namespace kkk1604.ViewModel
                 editEvent.ShowDialog();
 
         }, () => SelectedItem != null);
+        }
 
+        private void SelectAll()
+        {
+            Organizations = new ObservableCollection<Organization>(OrganizationsDB.GetDb().SelectAll());
+        }
 
-        }   
     }
 }
