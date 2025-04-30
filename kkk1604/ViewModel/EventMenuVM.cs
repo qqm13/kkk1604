@@ -12,10 +12,13 @@ namespace kkk1604.ViewModel
 {
     class EventMenuVM : BaseVM
     {
+        private ObservableCollection<Organization> organizations = new ObservableCollection<Organization>();
+
         public CommandVM OpenCreateEvent { get; set; }
         public CommandVM OpenEditEvent { get; set; }
-        public Organization SelectedItem { get; set; }
-        public ObservableCollection<Organization> Organizations { get; set; } = new ObservableCollection<Organization>();
+        public CommandVM RemoveEvent { get; set; }
+        public Organization SelectedEvent { get; set; }
+        public ObservableCollection<Organization> Organizations { get => organizations; set { organizations = value;Signal(); } }
 
         public EventMenuVM() 
         {
@@ -26,6 +29,7 @@ namespace kkk1604.ViewModel
              Organization organization = new Organization();
               CreateEvent createEvent = new CreateEvent(organization);
                 createEvent.ShowDialog();
+            SelectAll();
 
         }, () => true);
 
@@ -34,7 +38,13 @@ namespace kkk1604.ViewModel
                 EditEvent editEvent = new EditEvent();
                 editEvent.ShowDialog();
 
-        }, () => SelectedItem != null);
+        }, () => SelectedEvent != null);
+
+            RemoveEvent = new CommandVM(() =>
+            {
+                OrganizationsDB.GetDb().Remove(SelectedEvent);
+                SelectAll();
+            }, () => SelectedEvent != null);
         }
 
         private void SelectAll()

@@ -64,14 +64,14 @@
             <Label Content="Название" FontSize="15"/>
             <TextBox Text="{Binding TitleCustomDeathPlace}"/>
             <Label Content="Тип гроба"  FontSize="15"/>
-            <ComboBox ItemsSource="{Binding Coffins}" DisplayMemberPath="Title" SelectedItem="{Binding SelectedGrave}"/>
+            <ComboBox ItemsSource="{Binding Coffins}" DisplayMemberPath="Title" SelectedItem="{Binding SelectedCoffin }"/>
             <Label Content="Тип памятника"  FontSize="15"/>
-            <ComboBox ItemsSource="{Binding Graves}" DisplayMemberPath="Title" SelectedItem="{Binding SelectedCoffin}"/>
+            <ComboBox ItemsSource="{Binding Graves}" DisplayMemberPath="Title" SelectedItem="{Binding SelectedGrave}"/>
             <Label Content="Тип цветов"  FontSize="15"/>
             <ComboBox ItemsSource="{Binding Flowers}" DisplayMemberPath="Title" SelectedItem="{Binding SelectedFlower}"/>
 
             <Label Content="Цена" HorizontalAlignment="Center"/>
-            <TextBox Width="400" Height="30" IsReadOnly="True" Text="{Binding AllPrice}" TextWrapping="Wrap" MaxWidth="300"/>
+            <TextBox Width="400" Height="47" IsReadOnly="True" Text="{Binding AllPrice}" TextWrapping="Wrap" MaxWidth="350"/>
             <Button Content="Создать" Height="50" FontSize="15" Width="150" Margin="0 10 0 0" Command="{Binding CreateEvent}"/>
         </StackPanel>
 

@@ -138,7 +138,7 @@ namespace kkk1604.ViewModel
 
                 OrganizationAdd.Price = OrganizationAdd.DeathPlace.Price + OrganizationAdd.Place.Price + totalPriceUsligi + totalPriceGuests;
 
-                AllPrice = $"Цена места:{OrganizationAdd.Place.Price} + Цена Услуг:{totalPriceUsligi} + Цена за гостя:{totalPriceGuests} + Цена организации похороного места:{OrganizationAdd.DeathPlace.Price}(Гроб:{OrganizationAdd.DeathPlace.Coffin.Price}Памятник:{OrganizationAdd.DeathPlace.Grave.Price}Цветы:{OrganizationAdd.DeathPlace.Flower.Price} = Общая цена:{OrganizationAdd.Price})";
+                AllPrice = $"Цена места:{OrganizationAdd.Place.Price} + Цена Услуг:{totalPriceUsligi} + Цена за гостя:{totalPriceGuests} + Цена организации похороного места:{OrganizationAdd.DeathPlace.Price}(Гроб:{OrganizationAdd.DeathPlace.Coffin.Price}Памятник:{OrganizationAdd.DeathPlace.Grave.Price}Цветы:{OrganizationAdd.DeathPlace.Flower.Price}) = Общая цена:{OrganizationAdd.Price}";
 
 
                 OrganizationsDB.GetDb().Insert(OrganizationAdd);
