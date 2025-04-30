@@ -1,4 +1,6 @@
-﻿using System;
+﻿using kkk1604.Model;
+using kkk1604.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +21,10 @@ namespace kkk1604.View
     /// </summary>
     public partial class EditEvent : Window
     {
-        public EditEvent()
+        public EditEvent(Organization organization)
         {
             InitializeComponent();
+            ((EditEventVM)this.DataContext).SetOrganization(organization);
         }
     }
 }

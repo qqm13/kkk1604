@@ -35,8 +35,9 @@ namespace kkk1604.ViewModel
 
         OpenEditEvent = new CommandVM(() =>
         {
-                EditEvent editEvent = new EditEvent();
+                EditEvent editEvent = new EditEvent(SelectedEvent);
                 editEvent.ShowDialog();
+            SelectAll();
 
         }, () => SelectedEvent != null);
 

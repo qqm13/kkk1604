@@ -197,6 +197,9 @@ namespace kkk1604.ViewModel
                 }
                 catch { }
 
+                Worksheet sheetTwo = workbook.Worksheets[0];
+                sheetTwo.Name = "Статистика продаж";
+
 
                 //делать норм создание очтета летсгоу
                 //основана инфа о соыбтия 1первый лист +
