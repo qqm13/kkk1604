@@ -4,12 +4,19 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:kkk1604.View"
+        xmlns:ViewModel="clr-namespace:kkk1604.ViewModel"
+            DataContext="{DynamicResource vm}"
         mc:Ignorable="d"
-        Title="CreateEvent" Height="490" Width="880">
+        Title="CreateEvent" Height="525" Width="880">
+
+    <Window.Resources>
+        <ViewModel:CreateEventVM x:Key="vm"/>
+    </Window.Resources>
+    
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="100"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
@@ -18,50 +25,56 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.Column="1">
+        <StackPanel Grid.Column="0" Grid.ColumnSpan="3">
             <Label Content="Создание события" Margin="0 10 0 0" FontSize="15" HorizontalAlignment="Center"/>
         </StackPanel>
 
 
         <StackPanel Grid.Row="1" Grid.RowSpan="2">
             <Label Content="Выберите дату" FontSize="15"/>
-            <DatePicker/>
+            <DatePicker SelectedDate="{Binding SelectedDate}"/>
             <Label Content="Выберите адрес"  FontSize="15"/>
             <Label Content="Адрес"  FontSize="15"/>
-            <ComboBox/>
-            <Label Content="Сектор"  FontSize="15"/>
-            <ComboBox/>
-            <Label Content="Участок"  FontSize="15"/>
-            <ComboBox/>
+            <ComboBox ItemsSource="{Binding Places}" DisplayMemberPath="CemetaryAdress" SelectedItem="{Binding SelectedPlace}"/>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Сектор" Margin="0 0 10 0"/>
+                <Label Content="Участок" Margin="50 0 10 0"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBox Width="100" Margin="0 0 10 0" Text="{Binding Sector}" IsReadOnly="True"/>
+                <TextBox Width="100" Margin="0 0 0 0" Text="{Binding Plot}" IsReadOnly="True"/>
+            </StackPanel>
             <Label Content="Введите количество гостей"  FontSize="15"/>
-            <TextBox/>
-            <Label Content="Выберите шаблон" HorizontalAlignment="Center" Margin="0 10 0 0"  FontSize="15"/>
-            <ComboBox/>
+            <TextBox Text="{Binding GuestCount}"/>
+            <Label Content="Выберите" FontSize="15" Margin="20 6 0 0"/>
+            <CheckBox Content="Некролог" Margin="18 7 0 0" FontSize="16" IsChecked="{Binding Necrolog}"/>
+            <CheckBox Content="Последний ужин" Margin="18 7 0 0" FontSize="16" IsChecked="{Binding LastDiner}"/>
+            <CheckBox Content="Памятное видео" Margin="18 7 0 0" FontSize="16" IsChecked="{Binding LastVideo}"/>
+            <CheckBox Content="Автобус для гостей" Margin="18 7 0 0" FontSize="16" IsChecked="{Binding GuestBus}"/>
+            <CheckBox Content="Катафалк" Margin="18 7 0 0" FontSize="16" IsChecked="{Binding Catafalque}"/>
+            <CheckBox Content="Священик" Margin="18 7 0 0" FontSize="16" IsChecked="{Binding Priest}"/>
+           
         </StackPanel>
 
         <StackPanel Grid.Row="1" Grid.Column="2" Grid.RowSpan="2">
-            <Label Content="Или настройте врунчую тип"  FontSize="15"/>
+            
+            <Label Content="Выберите шаблон" HorizontalAlignment="Center" Margin="0 10 0 0"  FontSize="15"/>
+            <ComboBox ItemsSource="{Binding DeathPlaces}" DisplayMemberPath="Title" SelectedItem="{Binding SelectedDeathPlace}"/>
+            <Label Content="Или настройте врунчую тип"  FontSize="15" HorizontalAlignment="Center"/>
+            <Label Content="Название" FontSize="15"/>
+            <TextBox Text="{Binding TitleCustomDeathPlace}"/>
             <Label Content="Тип гроба"  FontSize="15"/>
-            <ComboBox/>
+            <ComboBox ItemsSource="{Binding Coffins}" DisplayMemberPath="Title" SelectedItem="{Binding SelectedGrave}"/>
             <Label Content="Тип памятника"  FontSize="15"/>
-            <ComboBox/>
+            <ComboBox ItemsSource="{Binding Graves}" DisplayMemberPath="Title" SelectedItem="{Binding SelectedCoffin}"/>
             <Label Content="Тип цветов"  FontSize="15"/>
-            <ComboBox/>
-            <Label Content="Выберите" FontSize="15" Margin="20 6 0 0"/>
-            <CheckBox Content="Некролог" Margin="18 7 0 0" FontSize="16"/>
-            <CheckBox Content="Последний ужин" Margin="18 7 0 0" FontSize="16"/>
-            <CheckBox Content="Памятное видео" Margin="18 7 0 0" FontSize="16"/>
-            <CheckBox Content="Автобус для гостей" Margin="18 7 0 0" FontSize="16"/>
-            <CheckBox Content="Катафалк" Margin="18 7 0 0" FontSize="16"/>
-            <CheckBox Content="Священик" Margin="18 7 0 0" FontSize="16"/>
+            <ComboBox ItemsSource="{Binding Flowers}" DisplayMemberPath="Title" SelectedItem="{Binding SelectedFlower}"/>
 
-        </StackPanel>
-
-        <StackPanel Grid.Row="1" Grid.Column="1" Grid.RowSpan="2" VerticalAlignment="Center">
             <Label Content="Цена" HorizontalAlignment="Center"/>
-            <TextBox Width="170" Height="30"/>
-            <Button Content="Создать" Height="50" FontSize="15" Width="150" Margin="0 10 0 0"/>
+            <TextBox Width="400" Height="30" IsReadOnly="True" Text="{Binding AllPrice}" TextWrapping="Wrap" MaxWidth="300"/>
+            <Button Content="Создать" Height="50" FontSize="15" Width="150" Margin="0 10 0 0" Command="{Binding CreateEvent}"/>
         </StackPanel>
+
 
     </Grid>
 </Window>

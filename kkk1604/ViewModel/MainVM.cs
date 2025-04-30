@@ -17,7 +17,7 @@ namespace kkk1604.ViewModel
     class MainVM : BaseVM
     {
         private string dateCheckResult;
-        private DateTime checkDate;
+        private DateTime checkDate = DateTime.Now;
 
         public CommandVM OpenPriceTest { get; set; }
         public CommandVM OpenEventMenu { get; set; }
@@ -28,8 +28,7 @@ namespace kkk1604.ViewModel
 
         public string DateCheckResult { get => dateCheckResult; set { dateCheckResult = value; Signal(); } }
         public DateTime CheckDate { get => checkDate; set { checkDate = value; Signal();} }
-        public DateTime Reportdate {  get; set; }
-        public DateTime BaseDate { get; set; } = new DateTime();
+        public DateTime Reportdate {  get; set; } = DateTime.Now;
 
 
         public MainVM()
@@ -49,7 +48,7 @@ namespace kkk1604.ViewModel
             if (DateCheckResult != "Занято")
                 DateCheckResult = "Свободно";
 
-        }, () => CheckDate != BaseDate);
+        }, () => true);
 
             OpenPriceTest = new CommandVM(() =>
         {
@@ -205,7 +204,7 @@ namespace kkk1604.ViewModel
                 //общий заработок 1первый лист +
                 //кратка инфа о  гробов,памятников,цветов + количество проданных того или иног овида плюс сколько заработали 2втопрой лист
 
-            }, () => Reportdate != BaseDate);
+            }, () => true);
 
         }
 

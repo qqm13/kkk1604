@@ -47,7 +47,7 @@ namespace kkk1604.ViewModel
             Calculate = new CommandVM(() =>
             {
                 TotalPrice = 0;
-                TotalPrice += GuestCount * 50;
+                TotalPrice += GuestCount * 150;
 
                 bool[] list = new bool[6];
                 list[0] = Necrolog;
@@ -61,7 +61,7 @@ namespace kkk1604.ViewModel
                 {
                     if(item == true)
                     {
-                        TotalPrice += 150;
+                        TotalPrice += 500;
                     }
                 }
 

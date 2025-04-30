@@ -1,4 +1,5 @@
 ﻿using kkk1604.Model;
+using kkk1604.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,6 +24,7 @@ namespace kkk1604.View
         public CreateEvent(Organization organization)
         {
             InitializeComponent();
+            ((CreateEventVM)this.DataContext).SetOrganization(organization);
         }
     }
 }

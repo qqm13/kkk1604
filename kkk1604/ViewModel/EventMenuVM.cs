@@ -23,7 +23,8 @@ namespace kkk1604.ViewModel
 
         OpenCreateEvent = new CommandVM(() =>
         {
-              CreateEvent createEvent = new CreateEvent(new Organization());
+             Organization organization = new Organization();
+              CreateEvent createEvent = new CreateEvent(organization);
                 createEvent.ShowDialog();
 
         }, () => true);
