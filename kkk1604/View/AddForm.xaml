@@ -29,9 +29,9 @@
 
         <StackPanel Grid.Row="1">
             <Label Content="Введите название" FontSize="16"/>
-            <TextBox FontSize="16" Height="40" Text="{Binding Formhere.Title}"/>
+            <TextBox FontSize="16" Height="40" Text="{Binding FormhereTitle}"/>
             <Label Content="Введите модификатор цены" FontSize="16"/>
-            <TextBox FontSize="16" Height="40" Text="{Binding Formhere.PriceModiffier}"/>
+            <TextBox FontSize="16" Height="40" Text="{Binding FormherePriceModiffier}"/>
         </StackPanel>
 
         <StackPanel Grid.Row="2">
@@ -42,7 +42,7 @@
             <Button Content="Редактировать" Height="40" Width="150" FontSize="16" Margin="10 10 0 0" HorizontalAlignment="Center" Command="{Binding UpdateForm}"/>
         </StackPanel>
 
-        <ListView Grid.Row="1" Grid.Column="1" Grid.RowSpan="2" ItemsSource="{Binding Forms}">
+        <ListView Grid.Row="1" Grid.Column="1" Grid.RowSpan="2" ItemsSource="{Binding Forms}" SelectedItem="{Binding Formhere}">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Названние" Width="200" DisplayMemberBinding="{Binding Title}"/>

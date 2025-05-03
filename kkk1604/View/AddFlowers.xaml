@@ -30,11 +30,11 @@
 
         <StackPanel Grid.Row="1">
             <Label Content="Введите название" FontSize="16"/>
-            <TextBox FontSize="16" Height="40" Text="{Binding FlowerHere.Title}"/>
+            <TextBox FontSize="16" Height="40" Text="{Binding FlowerHereTitle}"/>
             <Label Content="Введите количество" FontSize="16"/>
-            <TextBox FontSize="16" Height="40" Text="{Binding FlowerHere.Count}"/>
+            <TextBox FontSize="16" Height="40" Text="{Binding FlowerHereCount}"/>
             <Label Content="Введите цену" FontSize="16"/>
-            <TextBox FontSize="16" Height="40" Text="{Binding FlowerHere.Price}"/>
+            <TextBox FontSize="16" Height="40" Text="{Binding FlowerHerePrice}"/>
         </StackPanel>
 
         <StackPanel Grid.Row="2">

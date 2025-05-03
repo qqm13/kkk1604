@@ -12,7 +12,9 @@ namespace kkk1604.ViewModel
     class AddMaterialVM : BaseVM
     {
         private ObservableCollection<Material> materials = new ObservableCollection<Material>();
-        private Material materialHere = new Material();
+        private Material materialHere;
+        private string materialHereTitle;
+        private int materialHerePrice;
 
         public ObservableCollection<Material> Materials
         {
@@ -23,11 +25,24 @@ namespace kkk1604.ViewModel
                 Signal();
             }
         }
-        public Material MaterialHere { get => materialHere; set { materialHere = value; Signal(); } }
+        public Material MaterialHere { get => materialHere; set
+            {
+                materialHere = value;
+                if (materialHere != null)
+                {
+                    MaterialHereTitle = materialHere.Title;
+                    MaterialHerePrice = materialHere.Price;
+                }
+                Signal();
+            } 
+        }
 
         public CommandVM UpdateMaterial { get; set; }
         public CommandVM RemoveMaterial { get; set; }
         public CommandVM AddMaterial { get; set; }
+
+        public string MaterialHereTitle { get => materialHereTitle; set { materialHereTitle = value; Signal(); } }
+        public int MaterialHerePrice { get => materialHerePrice; set { materialHerePrice = value; Signal(); } }
 
 
         public AddMaterialVM()
@@ -36,9 +51,11 @@ namespace kkk1604.ViewModel
 
             UpdateMaterial = new CommandVM(() =>
             {
+                MaterialHere.Title = MaterialHereTitle;
+                MaterialHere.Price = MaterialHerePrice;
                 MaterialsDB.GetDb().Update(MaterialHere);
                 SelectAll();
-            }, () => MaterialHere != null);
+            }, () => MaterialHere != null && MaterialHereTitle != null && MaterialHerePrice != 0);
 
             RemoveMaterial = new CommandVM(() =>
             {
@@ -48,9 +65,12 @@ namespace kkk1604.ViewModel
 
             AddMaterial = new CommandVM(() =>
             {
-                MaterialsDB.GetDb().Insert(MaterialHere);
+                Material addMaterial = new Material();
+                addMaterial.Title = MaterialHereTitle;
+                addMaterial.Price = MaterialHerePrice;
+                MaterialsDB.GetDb().Insert(addMaterial);
                 SelectAll();
-            }, () => true);
+            }, () => MaterialHereTitle != null && MaterialHerePrice != 0);
 
 
         }

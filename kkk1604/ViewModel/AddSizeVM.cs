@@ -13,7 +13,9 @@ namespace kkk1604.ViewModel
     class AddSizeVM : BaseVM
     {
         private ObservableCollection<Size> sizes = new ObservableCollection<Size>();
-        private Size sizeHere = new Size();
+        private Size sizeHere;
+        private string sizeHereTitle;
+        private int sizeHerePriceModiffier;
 
         public ObservableCollection<Size> Sizes 
         {
@@ -24,11 +26,24 @@ namespace kkk1604.ViewModel
                 Signal();
             }
         }
-        public Size SizeHere { get => sizeHere; set { sizeHere = value; Signal(); } }
+        public Size SizeHere { get => sizeHere; set 
+            { 
+                sizeHere = value;
+                if (sizeHere != null)
+                {
+                    SizeHereTitle = sizeHere.Title;
+                    SizeHerePriceModiffier = sizeHerePriceModiffier;
+                }
+                Signal(); 
+            }
+        }
 
         public CommandVM UpdateSize { get; set; }
         public CommandVM RemoveSize { get; set; }
         public CommandVM AddSize { get; set; }
+
+        public string SizeHereTitle { get => sizeHereTitle; set { sizeHereTitle = value;Signal(); } }
+        public int SizeHerePriceModiffier { get => sizeHerePriceModiffier; set { sizeHerePriceModiffier = value; Signal(); } }
 
 
         public AddSizeVM()
@@ -37,9 +52,12 @@ namespace kkk1604.ViewModel
 
             UpdateSize = new CommandVM(() =>
             {
+                SizeHere.Title = SizeHereTitle;
+                SizeHere.PriceModiffier = SizeHerePriceModiffier;
+
                 SizesDB.GetDb().Update(SizeHere);
                 SelectAll();
-            }, () => SizeHere != null);
+            }, () => SizeHere != null && SizeHereTitle!= null && SizeHerePriceModiffier !=0 );
 
             RemoveSize = new CommandVM(() =>
             {
@@ -49,9 +67,13 @@ namespace kkk1604.ViewModel
 
             AddSize = new CommandVM(() =>
             {
-                SizesDB.GetDb().Insert(SizeHere);
+                Size sizeadd = new Size();
+                sizeadd.Title = SizeHereTitle;
+                sizeadd.PriceModiffier = SizeHerePriceModiffier;
+
+                SizesDB.GetDb().Insert(sizeadd);
                 SelectAll();
-            }, () => true);
+            }, () => SizeHereTitle != null && SizeHerePriceModiffier != 0);
 
 
         }

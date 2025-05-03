@@ -30,13 +30,13 @@
 
         <StackPanel Grid.Row="1">
             <Label Content="Введите адрес" FontSize="16"/>
-            <TextBox FontSize="16" Height="40" Text="{Binding PlaceHere.CemetaryAdress}"/>
+            <TextBox FontSize="16" Height="40" Text="{Binding PlaceHereCemetaryAdress}"/>
             <Label Content="Введите номер сектора" FontSize="16"/>
-            <TextBox FontSize="16" Height="40" Text="{Binding PlaceHere.CemeterySectorNumber}"/>
+            <TextBox FontSize="16" Height="40" Text="{Binding PlaceHereCemeterySectorNumber}"/>
             <Label Content="Введите номер участка" FontSize="16"/>
-            <TextBox FontSize="16" Height="40" Text="{Binding PlaceHere.CemeteryPlotNumber}"/>
+            <TextBox FontSize="16" Height="40" Text="{Binding PlaceHereCemeteryPlotNumber}"/>
             <Label Content="Введите цену" FontSize="16"/>
-            <TextBox FontSize="16" Height="40" Text="{Binding PlaceHere.Price}"/>
+            <TextBox FontSize="16" Height="40" Text="{Binding PlaceHerePrice}"/>
         </StackPanel>
 
         <StackPanel Grid.Row="2">

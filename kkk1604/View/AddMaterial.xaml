@@ -29,9 +29,9 @@
 
         <StackPanel Grid.Row="1">
             <Label Content="Введите название" FontSize="16"/>
-            <TextBox FontSize="16" Height="40" Text="{Binding MaterialHere.Title}"/>
+            <TextBox FontSize="16" Height="40" Text="{Binding MaterialHereTitle}"/>
             <Label Content="Введите цену" FontSize="16"/>
-            <TextBox FontSize="16" Height="40" Text="{Binding MaterialHere.Price}"/>
+            <TextBox FontSize="16" Height="40" Text="{Binding MaterialHerePrice}"/>
         </StackPanel>
 
         <StackPanel Grid.Row="2">
@@ -42,7 +42,7 @@
             <Button Content="Редактировать" Height="40" Width="150" FontSize="16" Margin="10 10 0 0" HorizontalAlignment="Center" Command="{Binding UpdateMaterial}"/>
         </StackPanel>
 
-        <ListView Grid.Row="1" Grid.Column="1" Grid.RowSpan="2" ItemsSource="{Binding Materials}">
+        <ListView Grid.Row="1" Grid.Column="1" Grid.RowSpan="2" ItemsSource="{Binding Materials}" SelectedItem="{Binding MaterialHere}">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Названние" Width="200" DisplayMemberBinding="{Binding Title}"/>

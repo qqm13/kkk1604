@@ -30,9 +30,9 @@
 
         <StackPanel Grid.Row="1">
             <Label Content="Введите название" FontSize="16"/>
-            <TextBox FontSize="16" Height="40" Text="{Binding SizeHere.Title}"/>
+            <TextBox FontSize="16" Height="40" Text="{Binding SizeHereTitle}"/>
             <Label Content="Введите модификатор цены" FontSize="16" />
-            <TextBox FontSize="16" Height="40" Text="{Binding SizeHere.PriceModiffier}"/>
+            <TextBox FontSize="16" Height="40" Text="{Binding SizeHerePriceModiffier}"/>
         </StackPanel>
 
         <StackPanel Grid.Row="2">

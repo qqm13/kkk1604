@@ -77,9 +77,14 @@ namespace kkk1604.ViewModel
                 OrganizationUpdate.PlaceId = SelectedPlace.Id;
                 OrganizationUpdate.GuestCount = GuestCount;
 
-                if (OrganizationUpdate.Date.Year > DateTime.Now.Year && OrganizationUpdate.Date.Month > DateTime.Now.Month && OrganizationUpdate.Date.Date > DateTime.Now.Date)
+                if (DateTime.Now.Year <= OrganizationUpdate.Date.Year && DateTime.Now.Month <= OrganizationUpdate.Date.Month && DateTime.Now.Day <= OrganizationUpdate.Date.Day)
                 {
                     OrganizationUpdate.Status = false;
+                }
+                else
+                {
+
+                    OrganizationUpdate.Status = true;
                 }
 
                 OrganizationUpdate.Necrology = Necrolog;
