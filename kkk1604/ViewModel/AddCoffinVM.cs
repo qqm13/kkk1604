@@ -12,7 +12,7 @@ namespace kkk1604.ViewModel
     class AddCoffinVM : BaseVM
     {
         private ObservableCollection<Coffin> coffins = new ObservableCollection<Coffin>();
-        private Coffin coffinHere = new Coffin();
+        private Coffin coffinHere;
 
         private ObservableCollection<Material> materials = new ObservableCollection<Material>();
         public ObservableCollection<Material> Materials
@@ -28,6 +28,9 @@ namespace kkk1604.ViewModel
         private Material selectedMaterial;
         private int priceHere;
         private Size selectedSize;
+        private string coffinHereTitle;
+
+        public string CoffinHereTitle { get => coffinHereTitle; set { coffinHereTitle = value; Signal(); } }
 
         public ObservableCollection<Size> Sizes
         {
@@ -54,7 +57,13 @@ namespace kkk1604.ViewModel
             set 
             { 
                 coffinHere = value;
-               
+                if(CoffinHere != null)
+                {
+                    CoffinHereTitle = coffinHere.Title;
+                    SelectedMaterial = coffinHere.Material;
+                    SelectedSize = coffinHere.Size;
+                    PriceHere = coffinHere.Price;
+                }
                 Signal();
             }
         }
@@ -111,12 +120,12 @@ namespace kkk1604.ViewModel
             {
                 CoffinHere.Material = SelectedMaterial;
                 CoffinHere.Size = SelectedSize;
-
+                CoffinHere.Title = CoffinHereTitle;
                 CoffinHere.Price = PriceHere;
 
                 CoffinsDB.GetDb().Update(CoffinHere);
                 SelectAll();
-            }, () => CoffinHere != null);
+            }, () => CoffinHere != null && SelectedMaterial != null && SelectedSize != null && CoffinHereTitle != null);
 
             RemoveCoffin = new CommandVM(() =>
             {
@@ -126,13 +135,15 @@ namespace kkk1604.ViewModel
 
             AddCoffin = new CommandVM(() =>
             {
-                CoffinHere.Material = SelectedMaterial;
-                CoffinHere.Size = SelectedSize;
+                Coffin coffinAdd = new Coffin();
+                coffinAdd.Title = CoffinHereTitle;
+                coffinAdd.Material = SelectedMaterial;
+                coffinAdd.Size = SelectedSize;
+                coffinAdd.Price =PriceHere;
 
-                CoffinHere.Price =PriceHere;
-                CoffinsDB.GetDb().Insert(CoffinHere);
+                CoffinsDB.GetDb().Insert(coffinAdd);
                 SelectAll();
-            }, () => true);
+            }, () =>   SelectedMaterial != null && SelectedSize != null && CoffinHereTitle != null);
 
 
         }

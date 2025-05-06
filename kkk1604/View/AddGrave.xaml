@@ -29,7 +29,7 @@
 
         <StackPanel Grid.Row="1">
             <Label Content="Введите название" FontSize="16"/>
-            <TextBox FontSize="16" Height="40" Text="{Binding GraveHere.Title}"/>
+            <TextBox FontSize="16" Height="40" Text="{Binding GraveHereTitle}"/>
             <Label Content="Выберите материал" FontSize="16"/>
             <ComboBox Height="35" FontSize="16" ItemsSource="{Binding Materials}" DisplayMemberPath="Title" SelectedItem="{Binding SelectedMaterial}"/>
             <Label Content="Выберите форму" FontSize="16"/>
@@ -46,7 +46,7 @@
             <Button Content="Редактировать" Height="40" Width="150" FontSize="16" Margin="10 10 0 0" HorizontalAlignment="Center" Command="{Binding UpdateGrave}"/>
         </StackPanel>
 
-        <ListView Grid.Row="1" Grid.Column="1" Grid.RowSpan="2" ItemsSource="{Binding Graves}">
+        <ListView Grid.Row="1" Grid.Column="1" Grid.RowSpan="2" ItemsSource="{Binding Graves}" SelectedItem="{Binding GraveHere}">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Названние" Width="100" DisplayMemberBinding="{Binding Title}"/>

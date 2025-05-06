@@ -30,6 +30,7 @@ namespace kkk1604.ViewModel
         private Coffin selectedCoffin;
         private Flower selectedFlower;
         private int priceHere;
+        private string deathPlaceHereTitle;
 
         public ObservableCollection<Coffin> Coffins
         {
@@ -79,6 +80,8 @@ namespace kkk1604.ViewModel
                 Signal();
             }
         }
+
+        public string DeathPlaceHereTitle { get => deathPlaceHereTitle; set { deathPlaceHereTitle = value; Signal(); } }
 
         public Grave SelectedGrave
         {
@@ -138,12 +141,12 @@ namespace kkk1604.ViewModel
                 DeathPlaceHere.Coffin = SelectedCoffin;
                 DeathPlaceHere.Grave = SelectedGrave;
                 DeathPlaceHere.Flower = SelectedFlower;
-
+                DeathPlaceHere.Title = DeathPlaceHereTitle;
                 DeathPlaceHere.Price = PriceHere;
 
                 DeathPlacesDB.GetDb().Update(DeathPlaceHere);
                 SelectAll();
-            }, () => DeathPlaceHere != null);
+            }, () => DeathPlaceHere != null && SelectedCoffin != null && SelectedGrave != null && SelectedFlower != null && DeathPlaceHereTitle != null); 
 
             RemoveDeathPlace = new CommandVM(() =>
             {
@@ -153,14 +156,16 @@ namespace kkk1604.ViewModel
 
             AddDeathPlace = new CommandVM(() =>
             {
-                DeathPlaceHere.Coffin = SelectedCoffin;
-                DeathPlaceHere.Grave = SelectedGrave;
-                DeathPlaceHere.Flower = SelectedFlower;
+                DeathPlace deathPlaceAdd = new DeathPlace();
+                deathPlaceAdd.Coffin = SelectedCoffin;
+                deathPlaceAdd.Grave = SelectedGrave;
+                deathPlaceAdd.Flower = SelectedFlower;
+                deathPlaceAdd.Price = PriceHere;
+                deathPlaceAdd.Title = DeathPlaceHereTitle;
 
-                DeathPlaceHere.Price = PriceHere;
-                DeathPlacesDB.GetDb().Insert(DeathPlaceHere);
+                DeathPlacesDB.GetDb().Insert(deathPlaceAdd);
                 SelectAll();
-            }, () => true);
+            }, () => SelectedCoffin != null && SelectedGrave != null && SelectedFlower != null && DeathPlaceHereTitle != null);
 
 
         }

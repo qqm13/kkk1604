@@ -30,7 +30,7 @@
 
         <StackPanel Grid.Row="1">
             <Label Content="Введите название" FontSize="16"/>
-            <TextBox FontSize="16" Height="40" Text="{Binding CoffinHere.Title}"/>
+            <TextBox FontSize="16" Height="40" Text="{Binding CoffinHereTitle}"/>
             <Label Content="Выберите материал" FontSize="16"/>
             <ComboBox Height="35" FontSize="16" ItemsSource="{Binding Materials}" SelectedItem="{Binding SelectedMaterial}" DisplayMemberPath="Title"/>
             <Label Content="Выберите размер" FontSize="16" />

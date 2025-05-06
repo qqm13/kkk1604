@@ -28,6 +28,9 @@ namespace kkk1604.ViewModel
         private Material selectedMaterial;
         private int priceHere;
         private Form selectedForm;
+        private string graveHereTitle;
+
+        public string GraveHereTitle { get => graveHereTitle; set { graveHereTitle = value; Signal(); } }
 
         public ObservableCollection<Form> Forms
         {
@@ -111,12 +114,12 @@ namespace kkk1604.ViewModel
             {
                 GraveHere.Material = SelectedMaterial;
                 GraveHere.Form = SelectedForm;
-
                 GraveHere.Price = PriceHere;
+                GraveHere.Title = GraveHereTitle;
 
                 GravesDB.GetDb().Update(GraveHere);
                 SelectAll();
-            }, () => GraveHere != null);
+            }, () => GraveHere != null && SelectedMaterial != null && SelectedForm != null && GraveHereTitle != null);
 
             RemoveGrave = new CommandVM(() =>
             {
@@ -126,13 +129,15 @@ namespace kkk1604.ViewModel
 
             AddGrave = new CommandVM(() =>
             {
-                GraveHere.Material = SelectedMaterial;
-                GraveHere.Form = SelectedForm;
+                Grave graveAdd = new Grave();
+                graveAdd.Material = SelectedMaterial;
+                graveAdd.Form = SelectedForm;
+                graveAdd.Price = PriceHere;
+                graveAdd.Title = GraveHereTitle;
 
-                GraveHere.Price = PriceHere;
-                GravesDB.GetDb().Insert(GraveHere);
+                GravesDB.GetDb().Insert(graveAdd);
                 SelectAll();
-            }, () => true);
+            }, () =>  SelectedMaterial != null && SelectedForm != null && GraveHereTitle != null);
 
 
         }
