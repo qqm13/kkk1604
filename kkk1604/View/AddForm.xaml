@@ -7,7 +7,7 @@
          xmlns:ViewModel="clr-namespace:kkk1604.ViewModel"
          DataContext="{DynamicResource vm}"
         mc:Ignorable="d"
-        Title="AddForm" Height="500" Width="700">
+        Title="AddForm" Height="500" Width="750">
 
     <Window.Resources>
         <ViewModel:AddFormVM x:Key="vm"/>
@@ -32,10 +32,10 @@
             <TextBox FontSize="16" Height="40" Text="{Binding FormhereTitle}"/>
             <Label Content="Введите Высоту" FontSize="16" />
             <TextBox FontSize="16" Height="40" Text="{Binding FormhereHeight}"/>
-            <Label Content="Введите Длинну" FontSize="16" />
-            <TextBox FontSize="16" Height="40" Text="{Binding FormhereLength}"/>
             <Label Content="Введите Ширину" FontSize="16" />
             <TextBox FontSize="16" Height="40" Text="{Binding FormhereWidth}"/>
+            <Label Content="Использование материала" FontSize="16" />
+            <TextBox FontSize="16" Height="40" Text="{Binding ForhHereMaterialUsage}" IsReadOnly="True"/>
         </StackPanel>
 
         <StackPanel Grid.Row="2">
@@ -50,9 +50,12 @@
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Названние" Width="160" DisplayMemberBinding="{Binding Title}"/>
-                    <GridViewColumn Header="Длина"  Width="70" DisplayMemberBinding="{Binding Length}"/>
-                    <GridViewColumn Header="Ширина"  Width="70" DisplayMemberBinding="{Binding Width}"/>
                     <GridViewColumn Header="Высота"  Width="70" DisplayMemberBinding="{Binding Height}"/>
+                    <GridViewColumn Header="Ширина"  Width="70" DisplayMemberBinding="{Binding Width}"/>
+                    <GridViewColumn   Width="111" DisplayMemberBinding="{Binding MaterialUsage}">
+                        <TextBlock Text="Использование материала" TextWrapping="Wrap"/>
+                    </GridViewColumn>
+                    
                 </GridView>
             </ListView.View>
         </ListView>

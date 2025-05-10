@@ -11,7 +11,7 @@ namespace kkk1604.Model
         public int Id { get; set; }
         public string Title { get; set; }
         public int Height { get; set; }
-        public int Length { get; set; }
+        public int MaterialUsage { get; set; }
         public int Width { get; set; }
     }
 }

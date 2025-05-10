@@ -93,7 +93,10 @@ namespace kkk1604.ViewModel
             {
                 selectedMaterial = value;
                 
-               
+               if(SelectedMaterial != null && selectedForm != null)
+                {
+                    PriceHere = selectedMaterial.Price * selectedForm.MaterialUsage + MasterPrice;
+                }
                 Signal();
             }
         }
@@ -104,7 +107,10 @@ namespace kkk1604.ViewModel
             set
             {
                 selectedForm = value;
-               
+                if (SelectedMaterial != null && selectedForm != null)
+                {
+                    PriceHere = selectedMaterial.Price * selectedForm.MaterialUsage + MasterPrice;
+                }
                 Signal();
             }
         }

@@ -18,7 +18,7 @@ namespace kkk1604.ViewModel
         private string formhereTitle;
         private int formhereHeight;
         private int formhereWidth;
-        private int formhereLength;
+        private int forhHereMaterialUsage;
 
         public ObservableCollection<Form> Forms
         {
@@ -38,14 +38,14 @@ namespace kkk1604.ViewModel
                     FormhereTitle = formhere.Title;
                     FormhereHeight = formhere.Height;
                     FormhereWidth = formhere.Width;
-                    FormhereLength = formhere.Length;
+                    ForhHereMaterialUsage = formhere.MaterialUsage;
                 }
                 else
                 {
                     FormhereTitle = "";
                     FormhereHeight = 0;
                     FormhereWidth = 0;
-                    FormhereLength = 0;
+                    ForhHereMaterialUsage = 0;
                 }
                 Signal();
             } 
@@ -58,9 +58,70 @@ namespace kkk1604.ViewModel
 
 
         public string FormhereTitle { get => formhereTitle; set { formhereTitle = value; Signal(); } }
-        public int FormhereHeight { get => formhereHeight; set { formhereHeight = value; Signal(); } }
-        public int FormhereWidth { get => formhereWidth; set { formhereWidth = value; Signal(); } }
-        public int FormhereLength { get => formhereLength; set { formhereLength = value; Signal(); } }
+        public int FormhereHeight { get => formhereHeight; set
+            {
+                formhereHeight = value;
+                if(FormhereHeight != null && FormhereWidth != null)
+                {
+                    double height = FormhereHeight;
+                    double width = FormhereWidth;
+                    height = height / 100;
+                    width = width / 100;
+                    if (height > Math.Round(height))
+                    {
+                        height = height + 1;
+                    }
+                    height = Math.Round(height);
+
+                    int iheight = Convert.ToInt32(height);
+
+                    if (width > Math.Round(width))
+                    {
+                        width = width + 1;
+                    }
+                    width = Math.Round(width);
+
+                    int iwidth = Convert.ToInt32(width);
+
+                    ForhHereMaterialUsage = iheight * iwidth;
+                }
+                Signal(); 
+            } 
+        }
+        public int FormhereWidth 
+        { 
+            get => formhereWidth;
+            set
+            {
+                formhereWidth = value;
+                if (FormhereHeight != null && FormhereWidth != null)
+                {
+                    double height = FormhereHeight;
+                    double width = FormhereWidth;
+                    height = height / 100;
+                    width = width / 100;
+                    if (height > Math.Round(height))
+                    {
+                        height = height + 1;
+                    }
+                    height = Math.Round(height);
+
+                    int iheight = Convert.ToInt32(height);
+
+                    if (width > Math.Round(width))
+                    {
+                        width = width + 1;
+                    }
+                    width = Math.Round(width);
+
+                    int iwidth = Convert.ToInt32(width);
+
+                    ForhHereMaterialUsage = iheight * iwidth;
+                }
+                Signal();
+            } 
+        }
+        public int ForhHereMaterialUsage { get => forhHereMaterialUsage; set { forhHereMaterialUsage = value; Signal(); } }
 
 
 
@@ -73,10 +134,10 @@ namespace kkk1604.ViewModel
                 Formhere.Title = FormhereTitle;
                 Formhere.Height = FormhereHeight;
                 Formhere.Width = FormhereWidth;
-                Formhere.Length = FormhereLength;
+                Formhere.MaterialUsage = ForhHereMaterialUsage;
                 FormsDB.GetDb().Update(Formhere);
                 SelectAll();
-            }, () => Formhere != null && string.IsNullOrWhiteSpace(FormhereTitle) == false && FormhereHeight != 0 && FormhereLength != 0 && formhereWidth != 0);
+            }, () => Formhere != null && string.IsNullOrWhiteSpace(FormhereTitle) == false && FormhereHeight != 0 && ForhHereMaterialUsage != 0 && formhereWidth != 0);
 
             RemoveForm = new CommandVM(() =>
             {
@@ -90,10 +151,10 @@ namespace kkk1604.ViewModel
                 addform.Title = FormhereTitle;
                 addform.Height = FormhereHeight;
                 addform.Width = FormhereWidth;
-                addform.Length = FormhereLength;
+                addform.MaterialUsage = ForhHereMaterialUsage;
                 FormsDB.GetDb().Insert(addform);
                 SelectAll();
-            }, () => string.IsNullOrWhiteSpace(FormhereTitle) == false && FormhereHeight != 0 && FormhereLength != 0 && formhereWidth != 0 );
+            }, () => string.IsNullOrWhiteSpace(FormhereTitle) == false && FormhereHeight != 0 && ForhHereMaterialUsage != 0 && formhereWidth != 0 );
 
 
         }

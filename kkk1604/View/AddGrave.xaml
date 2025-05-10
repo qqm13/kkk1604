@@ -33,7 +33,8 @@
             <Label Content="Выберите форму" FontSize="16"/>
             <ComboBox Height="35" FontSize="16" ItemsSource="{Binding Forms}" DisplayMemberPath="Title" SelectedItem="{Binding SelectedForm}"/>
             <Label Content="Цена" FontSize="16"/>
-            <TextBox FontSize="16" Height="40"  Text="{Binding PriceHere}" />
+            <TextBox FontSize="16" Height="40"  Text="{Binding PriceHere}" IsReadOnly="True" />
+            <Label Content="Цена работы мастера:10000" FontSize="12"/>
         </StackPanel>
 
         <StackPanel Grid.Row="2">
