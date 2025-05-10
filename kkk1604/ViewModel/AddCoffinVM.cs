@@ -95,7 +95,7 @@ namespace kkk1604.ViewModel
                if(SelectedSize != null && SelectedMaterial != null)
                 {
                     int Sdna = selectedSize.Length * selectedSize.Width;
-                    int Ssides = (2 * (selectedSize.Length * selectedSize.Height)) + (2 * (selectedSize.Width * selectedSize.Height));
+                    int Ssides =  (selectedSize.Length * selectedSize.Height) + (selectedSize.Width * selectedSize.Height);
                     int Skrishka = selectedSize.Length * selectedSize.Width;
                     int SAll = (Sdna + Skrishka + Ssides);
                     PriceHere =( SAll * selectedMaterial.Price / 10000) + MasterPrice;
@@ -113,7 +113,7 @@ namespace kkk1604.ViewModel
                 if (SelectedMaterial != null && SelectedSize != null)
                 {
                     int Sdna = selectedSize.Length * selectedSize.Width;
-                    int Ssides = (2 * (selectedSize.Length * selectedSize.Height)) + (2 * (selectedSize.Width * selectedSize.Height));
+                    int Ssides = (selectedSize.Length * selectedSize.Height) + (selectedSize.Width * selectedSize.Height);
                     int Skrishka = selectedSize.Length * selectedSize.Width;
                     int SAll = (Sdna + Skrishka + Ssides);
                     PriceHere = (SAll * selectedMaterial.Price / 10000) + MasterPrice;
