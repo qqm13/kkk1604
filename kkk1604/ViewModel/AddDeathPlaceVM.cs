@@ -6,6 +6,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace kkk1604.ViewModel
 {
@@ -162,6 +163,7 @@ namespace kkk1604.ViewModel
                 deathPlaceAdd.Flower = SelectedFlower;
                 deathPlaceAdd.Price = PriceHere;
                 deathPlaceAdd.Title = deathPlaceAdd.Coffin.Title + " " + deathPlaceAdd.Grave.Title + " " + deathPlaceAdd.Flower.Title;
+
 
                 DeathPlacesDB.GetDb().Insert(deathPlaceAdd);
                 SelectAll();

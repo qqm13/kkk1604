@@ -11,7 +11,7 @@ namespace kkk1604.ViewModel
 {
     class AddGraveVM : BaseVM
     {
-        public int MasterPrice { get; set; } = 10000;
+        public int MasterPrice { get; set; } = 15000;
 
         private ObservableCollection<Grave> graves = new ObservableCollection<Grave>();
         private Grave graveHere { get; set; } = new Grave();

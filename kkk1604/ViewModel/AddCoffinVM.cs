@@ -94,12 +94,53 @@ namespace kkk1604.ViewModel
                 selectedMaterial = value;
                if(SelectedSize != null && SelectedMaterial != null)
                 {
-                    int Sdna = selectedSize.Length * selectedSize.Width;
-                    int Ssides =  (selectedSize.Length * selectedSize.Height) + (selectedSize.Width * selectedSize.Height);
-                    int Skrishka = selectedSize.Length * selectedSize.Width;
-                    int SAll = (Sdna + Skrishka + Ssides);
-                    PriceHere =( SAll * selectedMaterial.Price / 10000) + MasterPrice;
+                    //int Sdna = selectedSize.Length * selectedSize.Width;
+                    //int Ssides =  (selectedSize.Length * selectedSize.Height) + (selectedSize.Width * selectedSize.Height);
+                    //int Skrishka = selectedSize.Length * selectedSize.Width;
+                    //int SAll = (Sdna + Skrishka + Ssides);
+                    //PriceHere =( SAll * selectedMaterial.Price / 10000) + MasterPrice;
+                    double lenght = selectedSize.Length;
+                    double width = selectedSize.Width;
+                    lenght = lenght / 100;
+                    width = width / 100;
+                    if (lenght > Math.Round(lenght))
+                    {
+                        lenght = lenght + 1;
+                    }
+                    lenght = Math.Round(lenght);
+
+                    int ilenght = Convert.ToInt32(lenght);
+
+                    if (width > Math.Round(width))
+                    {
+                        width = width + 1;
+                    }
+                    width = Math.Round(width);
+
+                    int iwidth = Convert.ToInt32(width);
+
+                    int resultDNA = ilenght * iwidth;
+                    int resultDnaIKrishki = resultDNA * 2;
+
+                    double height = selectedSize.Height;
+                    height = height / 100;
+                    if (height > Math.Round(height))
+                    {
+                        height = height + 1;
+                    }
+                    height = Math.Round(height);
+
+                    int iheight = Convert.ToInt32(height);
+
+                    int resultSide = iheight * ilenght;
+                    int resultSides = resultSide * 2;
+
+                    int iresult = resultDnaIKrishki + resultSides;
+
+                    PriceHere = iresult * selectedMaterial.Price + MasterPrice;
                 }
+
+               
                 Signal();
             }
         }
@@ -112,11 +153,50 @@ namespace kkk1604.ViewModel
                 selectedSize = value;
                 if (SelectedMaterial != null && SelectedSize != null)
                 {
-                    int Sdna = selectedSize.Length * selectedSize.Width;
-                    int Ssides = (selectedSize.Length * selectedSize.Height) + (selectedSize.Width * selectedSize.Height);
-                    int Skrishka = selectedSize.Length * selectedSize.Width;
-                    int SAll = (Sdna + Skrishka + Ssides);
-                    PriceHere = (SAll * selectedMaterial.Price / 10000) + MasterPrice;
+                    //int Sdna = selectedSize.Length * selectedSize.Width;
+                    //int Ssides = (selectedSize.Length * selectedSize.Height) + (selectedSize.Width * selectedSize.Height);
+                    //int Skrishka = selectedSize.Length * selectedSize.Width;
+                    //int SAll = (Sdna + Skrishka + Ssides);
+                    //PriceHere = (SAll * selectedMaterial.Price / 10000) + MasterPrice;
+                    double lenght = selectedSize.Length;
+                    double width = selectedSize.Width;
+                    lenght = lenght / 100;
+                    width = width / 100;
+                    if (lenght > Math.Round(lenght))
+                    {
+                        lenght = lenght + 1;
+                    }
+                    lenght = Math.Round(lenght);
+
+                    int ilenght = Convert.ToInt32(lenght);
+
+                    if (width > Math.Round(width))
+                    {
+                        width = width + 1;
+                    }
+                    width = Math.Round(width);
+
+                    int iwidth = Convert.ToInt32(width);
+
+                    int resultDNA = ilenght * iwidth;
+                    int resultDnaIKrishki = resultDNA * 2;
+
+                    double height = selectedSize.Height;
+                    height = height / 100;
+                    if (height > Math.Round(height))
+                    {
+                        height = height + 1;
+                    }
+                    height = Math.Round(height);
+
+                    int iheight = Convert.ToInt32(height);
+
+                    int resultSide = iheight * ilenght;
+                    int resultSides = resultSide * 2;
+
+                    int iresult = resultDnaIKrishki + resultSides;
+
+                    PriceHere = iresult * selectedMaterial.Price + MasterPrice;
                 }
                 Signal();
             }

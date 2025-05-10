@@ -31,12 +31,13 @@
         <StackPanel Grid.Row="1">
             <Label Content="Введите название" FontSize="16"/>
             <TextBox FontSize="16" Height="40" Text="{Binding SizeHereTitle}"/>
-            <Label Content="Введите Высоту" FontSize="16" />
-            <TextBox FontSize="16" Height="40" Text="{Binding SizeHereHeight}"/>
+            
             <Label Content="Введите Длинну" FontSize="16" />
             <TextBox FontSize="16" Height="40" Text="{Binding SizeHereLength}"/>
             <Label Content="Введите Ширину" FontSize="16" />
             <TextBox FontSize="16" Height="40" Text="{Binding SizeHereWidth}"/>
+            <Label Content="Введите Высоту" FontSize="16" />
+            <TextBox FontSize="16" Height="40" Text="{Binding SizeHereHeight}"/>
         </StackPanel>
 
         <StackPanel Grid.Row="2">

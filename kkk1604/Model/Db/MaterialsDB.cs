@@ -28,7 +28,7 @@ namespace kkk1604.Model.Db
                 MySqlCommand cmd = connection.CreateCommand("insert into `Materials` Values (0, @title, @Price);select LAST_INSERT_ID();");
 
                 cmd.Parameters.Add(new MySqlParameter("title", material.Title));
-                cmd.Parameters.Add(new MySqlParameter("PricePerSquareMeter", material.Price));
+                cmd.Parameters.Add(new MySqlParameter("Price", material.Price));
 
                 try
                 {
@@ -100,7 +100,7 @@ namespace kkk1604.Model.Db
             {
                 var mc = connection.CreateCommand($"update `Materials` set `Title`=@title, `Price`=@Price where `id` = {edit.Id}");
                 mc.Parameters.Add(new MySqlParameter("title", edit.Title));
-                mc.Parameters.Add(new MySqlParameter("PricePerSquareMeter", edit.Price));
+                mc.Parameters.Add(new MySqlParameter("Price", edit.Price));
 
                 try
                 {

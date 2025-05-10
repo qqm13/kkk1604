@@ -161,7 +161,7 @@ namespace kkk1604.ViewModel
                 OrganizationsDB.GetDb().Insert(OrganizationAdd);
                 
 
-            }, () =>true);
+            }, () => GuestCount != 0 && SelectedPlace != null && SelectedDeathPlace != null || SelectedCoffin != null && SelectedFlower != null && SelectedGrave != null && GuestCount != 0 && SelectedPlace != null);
 
 
         }
