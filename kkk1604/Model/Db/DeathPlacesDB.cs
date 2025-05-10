@@ -65,7 +65,7 @@ namespace kkk1604.Model.Db
 
             if (connection.OpenConnection())
             {
-                var command = connection.CreateCommand("SELECT dp.id, dp.Title, dp.GraveTypeId, dp.CoffinTypeId, dp.Price, dp.FlowersId, gt.Title, gt.Price, ct.Title, ct.Price, f.Title,f.Price  FROM DeathPlace dp JOIN CoffinType ct ON dp.CoffinTypeId = ct.id JOIN GraveType gt ON dp.GraveTypeId = gt.id JOIN Flowers f ON dp.FlowersId = f.id");
+                var command = connection.CreateCommand("SELECT dp.id, dp.Title, dp.GraveTypeId, dp.CoffinTypeId, dp.Price, dp.FlowersId, gt.Title, gt.Price, ct.Title, ct.Price, f.Title, f.Price  FROM DeathPlace dp JOIN CoffinType ct ON dp.CoffinTypeId = ct.id JOIN GraveType gt ON dp.GraveTypeId = gt.id JOIN Flowers f ON dp.FlowersId = f.id");
 
                 try
                 {

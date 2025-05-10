@@ -15,7 +15,9 @@ namespace kkk1604.ViewModel
         private ObservableCollection<Size> sizes = new ObservableCollection<Size>();
         private Size sizeHere;
         private string sizeHereTitle;
-        private int sizeHerePriceModiffier;
+        private int sizeHereHeight;
+        private int sizeHereWidth;
+        private int sizeHereLength;
 
         public ObservableCollection<Size> Sizes 
         {
@@ -32,7 +34,16 @@ namespace kkk1604.ViewModel
                 if (sizeHere != null)
                 {
                     SizeHereTitle = sizeHere.Title;
-                    SizeHerePriceModiffier = sizeHerePriceModiffier;
+                    SizeHereHeight = sizeHere.Height;
+                    SizeHereWidth = sizeHere.Width;
+                    SizeHereLength = sizeHere.Length;
+                }
+                else 
+                    {
+                    SizeHereTitle = " ";
+                    SizeHereHeight = 0;
+                    SizeHereWidth =0;
+                    SizeHereLength =0;
                 }
                 Signal(); 
             }
@@ -43,7 +54,10 @@ namespace kkk1604.ViewModel
         public CommandVM AddSize { get; set; }
 
         public string SizeHereTitle { get => sizeHereTitle; set { sizeHereTitle = value;Signal(); } }
-        public int SizeHerePriceModiffier { get => sizeHerePriceModiffier; set { sizeHerePriceModiffier = value; Signal(); } }
+        public int SizeHereHeight { get => sizeHereHeight; set { sizeHereHeight = value; Signal(); } }
+        public int SizeHereWidth { get => sizeHereWidth; set { sizeHereWidth = value; Signal(); } }
+        public int SizeHereLength { get => sizeHereLength; set { sizeHereLength = value; Signal(); } }
+
 
 
         public AddSizeVM()
@@ -53,11 +67,13 @@ namespace kkk1604.ViewModel
             UpdateSize = new CommandVM(() =>
             {
                 SizeHere.Title = SizeHereTitle;
-                SizeHere.PriceModiffier = SizeHerePriceModiffier;
+                SizeHere.Height = SizeHereHeight;
+                SizeHere.Width = SizeHereWidth;
+                SizeHere.Length = SizeHereLength;
 
                 SizesDB.GetDb().Update(SizeHere);
                 SelectAll();
-            }, () => SizeHere != null && SizeHereTitle!= null && SizeHerePriceModiffier !=0 );
+            }, () => SizeHere != null && string.IsNullOrWhiteSpace(SizeHereTitle) == false && SizeHereHeight != 0 && SizeHereWidth != 0 && SizeHereLength != 0);
 
             RemoveSize = new CommandVM(() =>
             {
@@ -69,11 +85,13 @@ namespace kkk1604.ViewModel
             {
                 Size sizeadd = new Size();
                 sizeadd.Title = SizeHereTitle;
-                sizeadd.PriceModiffier = SizeHerePriceModiffier;
+                sizeadd.Height = SizeHereHeight;
+                sizeadd.Width = SizeHereWidth;
+                sizeadd.Length = SizeHereLength;
 
                 SizesDB.GetDb().Insert(sizeadd);
                 SelectAll();
-            }, () => SizeHereTitle != null && SizeHerePriceModiffier != 0);
+            }, () => SizeHereHeight != 0 && SizeHereWidth != 0 && SizeHereLength != 0 && string.IsNullOrWhiteSpace(SizeHereTitle) == false); 
 
 
         }

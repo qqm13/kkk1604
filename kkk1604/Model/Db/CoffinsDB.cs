@@ -64,7 +64,7 @@ namespace kkk1604.Model.Db
 
             if (connection.OpenConnection())
             {
-                var command = connection.CreateCommand("SELECT c.id, c.Title, c.MaterialId, c.SizeId, c.Price,  m.Title, m.Price,s.Title,s.PriceModiffier from `CoffinType` c JOIN Materials m ON c.MaterialId = m.id JOIN Sizes s ON c.SizeId = s.id");
+                var command = connection.CreateCommand("SELECT c.id, c.Title, c.MaterialId, c.SizeId, c.Price,  m.Title, m.Price ,s.Title, s.Height, s.Length, s.Width from `CoffinType` c JOIN Materials m ON c.MaterialId = m.id JOIN Sizes s ON c.SizeId = s.id");
 
                 try
                 {
@@ -87,7 +87,9 @@ namespace kkk1604.Model.Db
                         string titleSize = string.Empty;
                         if (!dr.IsDBNull(7))
                             titleSize = dr.GetString(7);
-                        int priceModiffier = dr.GetInt32(8);
+                        int height = dr.GetInt32(8);
+                        int lenght = dr.GetInt32(9);
+                        int width = dr.GetInt32(10);
 
                         Material coffinMaterial = new Material
                         {
@@ -100,7 +102,10 @@ namespace kkk1604.Model.Db
                         {
                             Id = sizeId,
                             Title = titleSize,
-                            PriceModiffier = priceModiffier
+                            Height = height,
+                            Width = width,
+                            Length = lenght
+
                         };
 
                         coffins.Add(new Coffin

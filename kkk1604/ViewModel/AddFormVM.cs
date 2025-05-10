@@ -1,5 +1,6 @@
 ﻿using kkk1604.Model;
 using kkk1604.Model.Db;
+using kkk1604.View;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -15,7 +16,9 @@ namespace kkk1604.ViewModel
         private ObservableCollection<Form> forms = new ObservableCollection<Form>();
         private Form formhere;
         private string formhereTitle;
-        private int formherePriceModiffier;
+        private int formhereHeight;
+        private int formhereWidth;
+        private int formhereLength;
 
         public ObservableCollection<Form> Forms
         {
@@ -33,7 +36,16 @@ namespace kkk1604.ViewModel
                 if (formhere != null)
                 {
                     FormhereTitle = formhere.Title;
-                    FormherePriceModiffier = formhere.PriceModiffier;
+                    FormhereHeight = formhere.Height;
+                    FormhereWidth = formhere.Width;
+                    FormhereLength = formhere.Length;
+                }
+                else
+                {
+                    FormhereTitle = "";
+                    FormhereHeight = 0;
+                    FormhereWidth = 0;
+                    FormhereLength = 0;
                 }
                 Signal();
             } 
@@ -46,38 +58,42 @@ namespace kkk1604.ViewModel
 
 
         public string FormhereTitle { get => formhereTitle; set { formhereTitle = value; Signal(); } }
-        public int FormherePriceModiffier { get => formherePriceModiffier; set { formherePriceModiffier = value; Signal(); }
-}
+        public int FormhereHeight { get => formhereHeight; set { formhereHeight = value; Signal(); } }
+        public int FormhereWidth { get => formhereWidth; set { formhereWidth = value; Signal(); } }
+        public int FormhereLength { get => formhereLength; set { formhereLength = value; Signal(); } }
 
 
-public AddFormVM()
+
+        public AddFormVM()
         {
             SelectAll();
 
             UpdateForm = new CommandVM(() =>
             {
-                Form updateform = new Form();
                 Formhere.Title = FormhereTitle;
-                Formhere.PriceModiffier = FormherePriceModiffier;
-                updateform = Formhere;
-                FormsDB.GetDb().Update(updateform);
+                Formhere.Height = FormhereHeight;
+                Formhere.Width = FormhereWidth;
+                Formhere.Length = FormhereLength;
+                FormsDB.GetDb().Update(Formhere);
                 SelectAll();
-            }, () => Formhere != null && Formhere.Title!= null && Formhere.PriceModiffier != 0);
+            }, () => Formhere != null && string.IsNullOrWhiteSpace(FormhereTitle) == false && FormhereHeight != 0 && FormhereLength != 0 && formhereWidth != 0);
 
             RemoveForm = new CommandVM(() =>
             {
                 FormsDB.GetDb().Remove(Formhere);
                 SelectAll();
-            }, () => Formhere != null && Formhere.Title != null && Formhere.PriceModiffier != 0);
+            }, () => Formhere != null);
 
             AddForm = new CommandVM(() =>
             {
                 Form addform = new Form();
                 addform.Title = FormhereTitle;
-                addform.PriceModiffier = FormherePriceModiffier;
+                addform.Height = FormhereHeight;
+                addform.Width = FormhereWidth;
+                addform.Length = FormhereLength;
                 FormsDB.GetDb().Insert(addform);
                 SelectAll();
-            }, () => FormhereTitle != null && FormherePriceModiffier != 0);
+            }, () => string.IsNullOrWhiteSpace(FormhereTitle) == false && FormhereHeight != 0 && FormhereLength != 0 && formhereWidth != 0 );
 
 
         }

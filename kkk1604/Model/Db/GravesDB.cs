@@ -64,7 +64,7 @@ namespace kkk1604.Model.Db
 
             if (connection.OpenConnection())
             {
-                var command = connection.CreateCommand("SELECT gt.id, gt.Title, gt.FormId, gt.MaterialId, gt.Price, f.Title, f.PriceModiffier,m.Title, m.Price FROM GraveType gt JOIN Forms f ON gt.FormId = f.id JOIN Materials m ON gt.MaterialId = m.id");
+                var command = connection.CreateCommand("SELECT gt.id, gt.Title, gt.FormId, gt.MaterialId, gt.Price, f.Title, f.Height, f.Length, f.Width,m.Title, m.Price FROM GraveType gt JOIN Forms f ON gt.FormId = f.id JOIN Materials m ON gt.MaterialId = m.id");
 
                 try
                 {
@@ -82,18 +82,22 @@ namespace kkk1604.Model.Db
                         string titleForm = string.Empty;
                         if (!dr.IsDBNull(5))
                             titleForm = dr.GetString(5);
-                        int priceModiffier = dr.GetInt32(6);
+                        int height = dr.GetInt32(6);
+                        int length = dr.GetInt32(7);
+                        int width = dr.GetInt32(8);
 
                         string titleMaterial = string.Empty;
                         if (!dr.IsDBNull(7))
-                            titleMaterial = dr.GetString(7);
-                        int priceMaterial = dr.GetInt32(8);
+                            titleMaterial = dr.GetString(9);
+                        int priceMaterial = dr.GetInt32(10);
 
                         Form GraveForm = new Form
                         {
                           Id = formId,
                           Title = titleForm,
-                          PriceModiffier = priceModiffier
+                          Height = height,
+                          Width = width,
+                          Length = length
                         };
 
                         Material GraveMaterial = new Material

@@ -49,23 +49,33 @@ namespace kkk1604.ViewModel
                 TotalPrice = 0;
                 TotalPrice += GuestCount * 150;
 
-                bool[] list = new bool[6];
-                list[0] = Necrolog;
-                list[1] = LastDiner;
-                list[2] = LastVideo;
-                list[3] = GuestBus;
-                list[4] = Catafalque;
-                list[5] = Priest;
-
-                foreach (bool item in list)
+                if (Necrolog == true)
                 {
-                    if(item == true)
-                    {
-                        TotalPrice += 500;
-                    }
+                    TotalPrice += 2000;
+                }
+                if (LastDiner == true)
+                {
+                    TotalPrice += GuestCount * 300;
+                }
+                if (LastVideo == true)
+                {
+                    TotalPrice += 2000;
+                }
+                if (GuestBus == true)
+                {
+                    TotalPrice += GuestCount * 700;
+                }
+                if (Catafalque == true)
+                {
+                    TotalPrice += 5000;
+                }
+                if (Priest == true)
+                {
+                    TotalPrice += 10000;
                 }
 
-                if(SelectedDeathPlace != null)
+
+                if (SelectedDeathPlace != null)
                 {
                     TotalPrice += SelectedDeathPlace.Price;
                 }

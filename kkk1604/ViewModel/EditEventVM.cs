@@ -102,7 +102,7 @@ namespace kkk1604.ViewModel
                 else
                 {
                     DeathPlace custom = new DeathPlace();
-                    custom.Title = TitleCustomDeathPlace;
+                    custom.Title = SelectedFlower.Title + " " + SelectedCoffin.Title + " " + SelectedGrave.Title;
                     custom.Coffin = SelectedCoffin;
                     custom.CoffinTypeId = SelectedCoffin.Id;
                     custom.Grave = SelectedGrave;
@@ -119,28 +119,38 @@ namespace kkk1604.ViewModel
                 }
 
                 int totalPriceUsligi = 0;
-                int totalPriceGuests = GuestCount * 150;
 
-                bool[] list = new bool[6];
-                list[0] = Necrolog;
-                list[1] = LastDiner;
-                list[2] = LastVideo;
-                list[3] = GuestBus;
-                list[4] = Catafalque;
-                list[5] = Priest;
-
-                foreach (bool item in list)
+                if (Necrolog == true)
                 {
-                    if (item == true)
-                    {
-                        totalPriceUsligi += 500;
-                    }
+                    totalPriceUsligi += 2000;
+                }
+                if (LastDiner == true)
+                {
+                    totalPriceUsligi += GuestCount * 300;
+                }
+                if (LastVideo == true)
+                {
+                    totalPriceUsligi += 2000;
+                }
+                if (GuestBus == true)
+                {
+                    totalPriceUsligi += GuestCount * 700;
+                }
+                if (Catafalque == true)
+                {
+                    totalPriceUsligi += 5000;
+                }
+                if (Priest == true)
+                {
+                    totalPriceUsligi += 10000;
                 }
 
-                OrganizationUpdate.Price = OrganizationUpdate.DeathPlace.Price + OrganizationUpdate.Place.Price + totalPriceUsligi + totalPriceGuests;
 
-                AllPrice = $"Цена места:{OrganizationUpdate.Place.Price} + Цена Услуг:{totalPriceUsligi} + Цена за гостя:{totalPriceGuests} + Цена организации похоронного места:{OrganizationUpdate.DeathPlace.Price}(Гроб:{OrganizationUpdate.DeathPlace.Coffin.Price}Памятник:{OrganizationUpdate.DeathPlace.Grave.Price}Цветы:{OrganizationUpdate.DeathPlace.Flower.Price}) = Общая цена:{OrganizationUpdate.Price}";
+                OrganizationUpdate.Price = OrganizationUpdate.DeathPlace.Price + OrganizationUpdate.Place.Price + totalPriceUsligi;
 
+                AllPrice = $"Цена места:{OrganizationUpdate.Place.Price} + Цена Услуг:{totalPriceUsligi} + Цена организации похоронного места:{OrganizationUpdate.DeathPlace.Price}(Гроб:{OrganizationUpdate.DeathPlace.Coffin.Price}Памятник:{OrganizationUpdate.DeathPlace.Grave.Price}Цветы:{OrganizationUpdate.DeathPlace.Flower.Price}) = Общая цена:{OrganizationUpdate.Price}";
+
+              
 
                 OrganizationsDB.GetDb().Update(OrganizationUpdate);
 

@@ -110,31 +110,27 @@ namespace kkk1604.ViewModel
                 sheet.Range["E1"].ColumnWidth = 15;
                 sheet.Range["E1"].BorderAround();
 
-                sheet.Range["F1"].Text = "Тип организации захоронения";
+                sheet.Range["F1"].Text = "Тип памятника";
                 sheet.Range["F1"].ColumnWidth = 15;
                 sheet.Range["F1"].BorderAround();
 
-                sheet.Range["G1"].Text = "Тип памятника";
+                sheet.Range["G1"].Text = "Тип гроба";
                 sheet.Range["G1"].ColumnWidth = 15;
                 sheet.Range["G1"].BorderAround();
 
-                sheet.Range["H1"].Text = "Тип гроба";
+                sheet.Range["H1"].Text = "Тип цветов";
                 sheet.Range["H1"].ColumnWidth = 15;
                 sheet.Range["H1"].BorderAround();
 
-                sheet.Range["I1"].Text = "Тип цветов";
-                sheet.Range["I1"].ColumnWidth = 15;
-                sheet.Range["I1"].BorderAround();
+                sheet.Range["K1"].Text = "Количество проведенных событий";
+                sheet.Range["K1"].ColumnWidth = 25;
+                sheet.Range["K1"].IsWrapText = true;
+                sheet.Range["K1"].BorderAround();
 
-                sheet.Range["L1"].Text = "Количество проведенных событий";
+                sheet.Range["L1"].Text = "Заработок за все проведенные события";
                 sheet.Range["L1"].ColumnWidth = 25;
                 sheet.Range["L1"].IsWrapText = true;
                 sheet.Range["L1"].BorderAround();
-
-                sheet.Range["M1"].Text = "Заработок за все проведенные события";
-                sheet.Range["M1"].ColumnWidth = 25;
-                sheet.Range["M1"].IsWrapText = true;
-                sheet.Range["M1"].BorderAround();
 
                 int organizationsForReportCount = 0;
                 int organizationsForReportPrice = 0;
@@ -158,10 +154,9 @@ namespace kkk1604.ViewModel
                         sheet.Range[$"C{i + 2}"].Text = organizationsForReport[i].Place.CemetaryAdress.ToString();
                         sheet.Range[$"D{i + 2}"].Text = organizationsForReport[i].Status.ToString();
                         sheet.Range[$"E{i + 2}"].Text = organizationsForReport[i].Price.ToString();
-                        sheet.Range[$"F{i + 2}"].Text = organizationsForReport[i].DeathPlace.Title.ToString();
-                        sheet.Range[$"G{i + 2}"].Text = organizationsForReport[i].DeathPlace.Grave.Title.ToString();
-                        sheet.Range[$"H{i + 2}"].Text = organizationsForReport[i].DeathPlace.Coffin.Title.ToString();
-                        sheet.Range[$"I{i + 2}"].Text = organizationsForReport[i].DeathPlace.Flower.Title.ToString();
+                        sheet.Range[$"F{i + 2}"].Text = organizationsForReport[i].DeathPlace.Grave.Title.ToString();
+                        sheet.Range[$"G{i + 2}"].Text = organizationsForReport[i].DeathPlace.Coffin.Title.ToString();
+                        sheet.Range[$"H{i + 2}"].Text = organizationsForReport[i].DeathPlace.Flower.Title.ToString();
 
                         sheet.Range[$"A{i + 2}"].BorderAround();
                         sheet.Range[$"B{i + 2}"].BorderAround();
@@ -171,7 +166,6 @@ namespace kkk1604.ViewModel
                         sheet.Range[$"F{i + 2}"].BorderAround();
                         sheet.Range[$"G{i + 2}"].BorderAround();
                         sheet.Range[$"H{i + 2}"].BorderAround();
-                        sheet.Range[$"I{i + 2}"].BorderAround();
 
                         if (organizationsForReport[i].Status == true)
                         {
@@ -181,15 +175,15 @@ namespace kkk1604.ViewModel
                     }
                 }
 
-                sheet.Range["L2"].Text = organizationsForReportCount.ToString();
+                sheet.Range["K2"].Text = organizationsForReportCount.ToString();
+                sheet.Range["K2"].ColumnWidth = 25;
+                sheet.Range["K2"].IsWrapText = true;
+                sheet.Range["K2"].BorderAround();
+
+                sheet.Range["L2"].Text = organizationsForReportPrice.ToString();
                 sheet.Range["L2"].ColumnWidth = 25;
                 sheet.Range["L2"].IsWrapText = true;
                 sheet.Range["L2"].BorderAround();
-
-                sheet.Range["M2"].Text = organizationsForReportPrice.ToString();
-                sheet.Range["M2"].ColumnWidth = 25;
-                sheet.Range["M2"].IsWrapText = true;
-                sheet.Range["M2"].BorderAround();
 
                 sheetTwo.Range["A1"].Text = "Гробы";
                 sheetTwo.Range["A1:G1"].Merge();

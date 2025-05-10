@@ -7,7 +7,7 @@
          xmlns:ViewModel="clr-namespace:kkk1604.ViewModel"
         DataContext="{DynamicResource vm}"
         mc:Ignorable="d"
-        Title="AddDeathplace" Height="530" Width="840">
+        Title="AddDeathplace" Height="500" Width="840">
     
     <Window.Resources>
         <ViewModel:AddDeathPlaceVM x:Key="vm"/>
@@ -20,7 +20,7 @@
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="50"/>
-                <RowDefinition Height="350"/>
+                <RowDefinition Height="300"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
 
@@ -28,10 +28,8 @@
                 <Label Content="Шаблон" FontSize="16" Margin="15 20 0 0"/>
             </StackPanel>
 
-            <StackPanel Grid.Row="1">
-                <Label Content="Введите название" FontSize="16"/>
-                <TextBox FontSize="16" Height="40" Text="{Binding DeathPlaceHereTitle}"/>
-                <Label Content="Выберите Цветы" FontSize="16"/>
+        <StackPanel Grid.Row="1">
+            <Label Content="Выберите Цветы" FontSize="16"/>
                 <ComboBox Height="35" FontSize="16" ItemsSource="{Binding Flowers}" DisplayMemberPath="Title" SelectedItem="{Binding SelectedFlower}"/>
                 <Label Content="Выберите Гроб" FontSize="16" />
                 <ComboBox Height="35" FontSize="16" ItemsSource="{Binding Coffins}" DisplayMemberPath="Title" SelectedItem="{Binding SelectedCoffin}"/>
@@ -51,12 +49,11 @@
 
         <ListView Grid.Row="1" Grid.Column="1" Grid.RowSpan="2" ItemsSource="{Binding DeathPlaces}" SelectedItem="{Binding DeathPlaceHere}">
                 <ListView.View>
-                    <GridView>
-                        <GridViewColumn Header="Названние" Width="100" DisplayMemberBinding="{Binding Title}"/>
+                <GridView>
                     <GridViewColumn Header="Цветы"  Width="100" DisplayMemberBinding="{Binding Flower.Title}"/>
-                    <GridViewColumn Header="Гроб"  Width="100" DisplayMemberBinding="{Binding Coffin.Title}"/>
-                    <GridViewColumn Header="Надгробие"  Width="100" DisplayMemberBinding="{Binding Grave.Title}" />
-                    <GridViewColumn Header="Цена"  Width="100" DisplayMemberBinding="{Binding Price}"/>
+                    <GridViewColumn Header="Гроб"  Width="150" DisplayMemberBinding="{Binding Coffin.Title}"/>
+                    <GridViewColumn Header="Надгробие"  Width="150" DisplayMemberBinding="{Binding Grave.Title}" />
+                    <GridViewColumn Header="Цена"  Width="110" DisplayMemberBinding="{Binding Price}"/>
                     </GridView>
                 </ListView.View>
             </ListView>

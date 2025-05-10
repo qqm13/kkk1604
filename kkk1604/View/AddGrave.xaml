@@ -7,7 +7,7 @@
         xmlns:ViewModel="clr-namespace:kkk1604.ViewModel"
         DataContext="{DynamicResource vm}"
         mc:Ignorable="d"
-        Title="AddGrave" Height="500" Width="740">
+        Title="AddGrave" Height="470" Width="740">
     <Window.Resources>
         <ViewModel:AddGraveVM x:Key="vm"/>
     </Window.Resources>
@@ -19,7 +19,7 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
-            <RowDefinition Height="300"/>
+            <RowDefinition Height="250"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
 
@@ -28,14 +28,12 @@
         </StackPanel>
 
         <StackPanel Grid.Row="1">
-            <Label Content="Введите название" FontSize="16"/>
-            <TextBox FontSize="16" Height="40" Text="{Binding GraveHereTitle}"/>
             <Label Content="Выберите материал" FontSize="16"/>
             <ComboBox Height="35" FontSize="16" ItemsSource="{Binding Materials}" DisplayMemberPath="Title" SelectedItem="{Binding SelectedMaterial}"/>
             <Label Content="Выберите форму" FontSize="16"/>
             <ComboBox Height="35" FontSize="16" ItemsSource="{Binding Forms}" DisplayMemberPath="Title" SelectedItem="{Binding SelectedForm}"/>
             <Label Content="Цена" FontSize="16"/>
-            <TextBox FontSize="16" Height="40" IsReadOnly="True" Text="{Binding PriceHere}"/>
+            <TextBox FontSize="16" Height="40"  Text="{Binding PriceHere}" />
         </StackPanel>
 
         <StackPanel Grid.Row="2">

@@ -25,10 +25,12 @@ namespace kkk1604.Model.Db
 
             if (connection.OpenConnection())
             {
-                MySqlCommand cmd = connection.CreateCommand("insert into `Forms` Values (0, @title, @priceModiffier);select LAST_INSERT_ID();");
+                MySqlCommand cmd = connection.CreateCommand("insert into `Forms` Values (0, @title, @height, @width, @length );select LAST_INSERT_ID();");
 
                 cmd.Parameters.Add(new MySqlParameter("title", form.Title));
-                cmd.Parameters.Add(new MySqlParameter("priceModiffier", form.PriceModiffier));
+                cmd.Parameters.Add(new MySqlParameter("height", form.Height));
+                cmd.Parameters.Add(new MySqlParameter("width", form.Width));
+                cmd.Parameters.Add(new MySqlParameter("length", form.Length));
 
                 try
                 {
@@ -62,7 +64,7 @@ namespace kkk1604.Model.Db
 
             if (connection.OpenConnection())
             {
-                var command = connection.CreateCommand("select `id`, `Title`, `PriceModiffier` from `Forms` ");
+                var command = connection.CreateCommand("select `id`, `Title`, `Height`, `Length`, `Width` from `Forms` ");
 
                 try
                 {
@@ -73,12 +75,17 @@ namespace kkk1604.Model.Db
                         string title = string.Empty;
                         if (!dr.IsDBNull(1))
                             title = dr.GetString(1);
-                        int priceModiffier = dr.GetInt32(2);
+                        int height = dr.GetInt32(2);
+                        int width = dr.GetInt32(3);
+                        int length = dr.GetInt32(4);
                         forms.Add(new Form
                         {
                             Id = id,
                             Title = title,
-                            PriceModiffier = priceModiffier
+                            Height = height,
+                            Width = width,
+                            Length = length,
+
                         });
                     }
                 }
@@ -97,9 +104,11 @@ namespace kkk1604.Model.Db
             if (connection == null)
                 return result; if (connection.OpenConnection())
             {
-                var mc = connection.CreateCommand($"update `Forms` set `Title`=@title, `PriceModiffier`=@priceModiffier where `id` = {edit.Id}");
+                var mc = connection.CreateCommand($"update `Forms` set `Title`=@title, `Height`=@Height, `Length`=@Length, `Width`=@Width where `id` = {edit.Id}");
                 mc.Parameters.Add(new MySqlParameter("title", edit.Title));
-                mc.Parameters.Add(new MySqlParameter("priceModiffier", edit.PriceModiffier));
+                mc.Parameters.Add(new MySqlParameter("Height", edit.Height));
+                mc.Parameters.Add(new MySqlParameter("Length", edit.Length));
+                mc.Parameters.Add(new MySqlParameter("Width", edit.Width));
 
                 try
                 {

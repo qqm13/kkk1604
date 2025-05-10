@@ -55,7 +55,7 @@ namespace kkk1604.ViewModel
                 MaterialHere.Price = MaterialHerePrice;
                 MaterialsDB.GetDb().Update(MaterialHere);
                 SelectAll();
-            }, () => MaterialHere != null && MaterialHereTitle != null && MaterialHerePrice != 0);
+            }, () => MaterialHere != null && string.IsNullOrWhiteSpace(MaterialHereTitle) == false && MaterialHerePrice != 0);
 
             RemoveMaterial = new CommandVM(() =>
             {
@@ -70,7 +70,7 @@ namespace kkk1604.ViewModel
                 addMaterial.Price = MaterialHerePrice;
                 MaterialsDB.GetDb().Insert(addMaterial);
                 SelectAll();
-            }, () => MaterialHereTitle != null && MaterialHerePrice != 0);
+            }, () => MaterialHerePrice != 0 && string.IsNullOrWhiteSpace(MaterialHereTitle) == false);
 
 
         }

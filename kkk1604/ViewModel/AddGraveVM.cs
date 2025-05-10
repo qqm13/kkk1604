@@ -11,6 +11,8 @@ namespace kkk1604.ViewModel
 {
     class AddGraveVM : BaseVM
     {
+        public int MasterPrice { get; set; } = 10000;
+
         private ObservableCollection<Grave> graves = new ObservableCollection<Grave>();
         private Grave graveHere { get; set; } = new Grave();
 
@@ -57,7 +59,20 @@ namespace kkk1604.ViewModel
             set
             {
                 graveHere = value;
-
+                if (GraveHere != null)
+                {
+                    GraveHereTitle = graveHere.Title;
+                    SelectedMaterial = graveHere.Material;
+                    selectedForm = graveHere.Form;
+                    PriceHere = graveHere.Price;
+                }
+                else
+                {
+                    GraveHereTitle = null;
+                    SelectedMaterial = null;
+                    selectedForm = null;
+                    PriceHere = 0;
+                }
                 Signal();
             }
         }
@@ -77,10 +92,8 @@ namespace kkk1604.ViewModel
             set
             {
                 selectedMaterial = value;
-                if (SelectedForm != null && SelectedMaterial != null)
-                {
-                    PriceHere = SelectedMaterial.Price * SelectedForm.PriceModiffier;
-                }
+                
+               
                 Signal();
             }
         }
@@ -91,10 +104,7 @@ namespace kkk1604.ViewModel
             set
             {
                 selectedForm = value;
-                if (SelectedMaterial != null && SelectedForm != null)
-                {
-                    PriceHere = SelectedMaterial.Price * SelectedForm.PriceModiffier;
-                }
+               
                 Signal();
             }
         }
@@ -115,11 +125,11 @@ namespace kkk1604.ViewModel
                 GraveHere.Material = SelectedMaterial;
                 GraveHere.Form = SelectedForm;
                 GraveHere.Price = PriceHere;
-                GraveHere.Title = GraveHereTitle;
+                GraveHere.Title = SelectedForm.Title + " " + SelectedMaterial.Title;
 
                 GravesDB.GetDb().Update(GraveHere);
                 SelectAll();
-            }, () => GraveHere != null && SelectedMaterial != null && SelectedForm != null && GraveHereTitle != null);
+            }, () => GraveHere != null && SelectedMaterial != null && SelectedForm != null );
 
             RemoveGrave = new CommandVM(() =>
             {
@@ -133,11 +143,11 @@ namespace kkk1604.ViewModel
                 graveAdd.Material = SelectedMaterial;
                 graveAdd.Form = SelectedForm;
                 graveAdd.Price = PriceHere;
-                graveAdd.Title = GraveHereTitle;
+                graveAdd.Title = SelectedForm.Title + " " + SelectedMaterial.Title;
 
                 GravesDB.GetDb().Insert(graveAdd);
                 SelectAll();
-            }, () =>  SelectedMaterial != null && SelectedForm != null && GraveHereTitle != null);
+            }, () =>  SelectedMaterial != null && SelectedForm != null);
 
 
         }

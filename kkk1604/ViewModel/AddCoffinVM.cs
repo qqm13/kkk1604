@@ -64,6 +64,13 @@ namespace kkk1604.ViewModel
                     SelectedSize = coffinHere.Size;
                     PriceHere = coffinHere.Price;
                 }
+                else
+                {
+                    CoffinHereTitle = "";
+                    SelectedMaterial = null;
+                    SelectedSize = null;
+                    PriceHere = 0;
+                }
                 Signal();
             }
         }
@@ -77,6 +84,8 @@ namespace kkk1604.ViewModel
             }
         }
 
+        public int MasterPrice { get; set; } = 10000;
+
         public Material SelectedMaterial 
         { 
             get => selectedMaterial;
@@ -85,7 +94,11 @@ namespace kkk1604.ViewModel
                 selectedMaterial = value;
                if(SelectedSize != null && SelectedMaterial != null)
                 {
-                    PriceHere = SelectedMaterial.Price * SelectedSize.PriceModiffier;
+                    int Sdna = selectedSize.Length * selectedSize.Width;
+                    int Ssides = (2 * (selectedSize.Length * selectedSize.Height)) + (2 * (selectedSize.Width * selectedSize.Height));
+                    int Skrishka = selectedSize.Length * selectedSize.Width;
+                    int SAll = (Sdna + Skrishka + Ssides);
+                    PriceHere =( SAll * selectedMaterial.Price / 10000) + MasterPrice;
                 }
                 Signal();
             }
@@ -99,7 +112,11 @@ namespace kkk1604.ViewModel
                 selectedSize = value;
                 if (SelectedMaterial != null && SelectedSize != null)
                 {
-                    PriceHere = SelectedMaterial.Price * SelectedSize.PriceModiffier;
+                    int Sdna = selectedSize.Length * selectedSize.Width;
+                    int Ssides = (2 * (selectedSize.Length * selectedSize.Height)) + (2 * (selectedSize.Width * selectedSize.Height));
+                    int Skrishka = selectedSize.Length * selectedSize.Width;
+                    int SAll = (Sdna + Skrishka + Ssides);
+                    PriceHere = (SAll * selectedMaterial.Price / 10000) + MasterPrice;
                 }
                 Signal();
             }
@@ -120,12 +137,12 @@ namespace kkk1604.ViewModel
             {
                 CoffinHere.Material = SelectedMaterial;
                 CoffinHere.Size = SelectedSize;
-                CoffinHere.Title = CoffinHereTitle;
+                CoffinHere.Title = SelectedMaterial.Title + " " + SelectedSize.Title;
                 CoffinHere.Price = PriceHere;
 
                 CoffinsDB.GetDb().Update(CoffinHere);
                 SelectAll();
-            }, () => CoffinHere != null && SelectedMaterial != null && SelectedSize != null && CoffinHereTitle != null);
+            }, () => CoffinHere != null && SelectedMaterial != null && SelectedSize != null );
 
             RemoveCoffin = new CommandVM(() =>
             {
@@ -136,14 +153,14 @@ namespace kkk1604.ViewModel
             AddCoffin = new CommandVM(() =>
             {
                 Coffin coffinAdd = new Coffin();
-                coffinAdd.Title = CoffinHereTitle;
+                coffinAdd.Title = SelectedMaterial.Title + " " + SelectedSize.Title;
                 coffinAdd.Material = SelectedMaterial;
                 coffinAdd.Size = SelectedSize;
                 coffinAdd.Price =PriceHere;
 
                 CoffinsDB.GetDb().Insert(coffinAdd);
                 SelectAll();
-            }, () =>   SelectedMaterial != null && SelectedSize != null && CoffinHereTitle != null);
+            }, () =>   SelectedMaterial != null && SelectedSize != null);
 
 
         }

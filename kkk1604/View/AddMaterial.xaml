@@ -7,7 +7,7 @@
         xmlns:ViewModel="clr-namespace:kkk1604.ViewModel"
         DataContext="{DynamicResource vm}"
         mc:Ignorable="d"
-        Title="AddMaterial"  Height="400" Width="670">
+        Title="AddMaterial"  Height="400" Width="700">
     <Window.Resources>
         <ViewModel:AddMaterialVM x:Key="vm"/>
     </Window.Resources>
@@ -30,7 +30,7 @@
         <StackPanel Grid.Row="1">
             <Label Content="Введите название" FontSize="16"/>
             <TextBox FontSize="16" Height="40" Text="{Binding MaterialHereTitle}"/>
-            <Label Content="Введите цену" FontSize="16"/>
+            <Label Content="Введите цену за квадратный метр" FontSize="16"/>
             <TextBox FontSize="16" Height="40" Text="{Binding MaterialHerePrice}"/>
         </StackPanel>
 
@@ -46,7 +46,7 @@
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Названние" Width="200" DisplayMemberBinding="{Binding Title}"/>
-                    <GridViewColumn Header="Цена"  Width="140" DisplayMemberBinding="{Binding Price}"/>
+                    <GridViewColumn Header="Цена за квадратный метр"  Width="145" DisplayMemberBinding="{Binding Price}" />
                 </GridView>
             </ListView.View>
         </ListView>

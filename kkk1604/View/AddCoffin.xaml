@@ -7,7 +7,7 @@
          xmlns:ViewModel="clr-namespace:kkk1604.ViewModel"
         DataContext="{DynamicResource vm}"
         mc:Ignorable="d"
-        Title="AddCoffin" Height="500" Width="740">
+        Title="AddCoffin" Height="470" Width="740">
 
     <Window.Resources>
         <ViewModel:AddCoffinVM x:Key="vm"/>
@@ -20,7 +20,7 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
-            <RowDefinition Height="300"/>
+            <RowDefinition Height="250"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
 
@@ -29,14 +29,13 @@
         </StackPanel>
 
         <StackPanel Grid.Row="1">
-            <Label Content="Введите название" FontSize="16"/>
-            <TextBox FontSize="16" Height="40" Text="{Binding CoffinHereTitle}"/>
             <Label Content="Выберите материал" FontSize="16"/>
-            <ComboBox Height="35" FontSize="16" ItemsSource="{Binding Materials}" SelectedItem="{Binding SelectedMaterial}" DisplayMemberPath="Title"/>
+            <ComboBox Height="35" FontSize="16" ItemsSource="{Binding Materials}" SelectedItem="{Binding SelectedMaterial}" DisplayMemberPath="Title" />
             <Label Content="Выберите размер" FontSize="16" />
             <ComboBox Height="35" FontSize="16" ItemsSource="{Binding Sizes}" SelectedItem="{Binding SelectedSize}"  DisplayMemberPath="Title"/>
             <Label Content="Цена" FontSize="16"/>
-            <TextBox FontSize="16" Height="40" Text="{Binding PriceHere}" IsReadOnly="True"/>
+            <TextBox FontSize="16" Height="40" Text="{Binding PriceHere}"/>
+            
         </StackPanel>
 
         <StackPanel Grid.Row="2">
@@ -50,8 +49,8 @@
         <ListView Grid.Row="1" Grid.Column="1" Grid.RowSpan="2" ItemsSource="{Binding Coffins}" SelectedItem="{Binding CoffinHere}">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Названние" Width="100" DisplayMemberBinding="{Binding Title}"/>
-                    <GridViewColumn Header="Материал"  Width="100" DisplayMemberBinding="{Binding Material.Title}"/>
+                    <GridViewColumn Header="Названние" Width="150" DisplayMemberBinding="{Binding Title}"/>
+                    <GridViewColumn Header="Материал"  Width="70" DisplayMemberBinding="{Binding Material.Title}"/>
                     <GridViewColumn Header="Размер"  Width="100" DisplayMemberBinding="{Binding Size.Title}"/>
                     <GridViewColumn Header="Цена"  Width="100" DisplayMemberBinding="{Binding Price}"/>
                 </GridView>

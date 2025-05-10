@@ -40,6 +40,13 @@ namespace kkk1604.ViewModel
                     PlaceHereCemeteryPlotNumber = placeHere.CemeteryPlotNumber;
                     PlaceHerePrice = placeHere.Price;
                 }
+                else
+                {
+                    PlaceHereCemetaryAdress = "";
+                    PlaceHereCemeterySectorNumber = 0;
+                    PlaceHereCemeteryPlotNumber = 0;
+                    PlaceHerePrice = 0;
+                }
                 Signal();
             }
         }
@@ -68,7 +75,7 @@ namespace kkk1604.ViewModel
 
                 PlacesDB.GetDb().Update(PlaceHere);
                 SelectAll();
-            }, () => PlaceHere != null && PlaceHereCemetaryAdress != null && PlaceHereCemeterySectorNumber != 0 && PlaceHereCemeteryPlotNumber != 0 && PlaceHerePrice != 0);
+            }, () => PlaceHere != null && PlaceHereCemeterySectorNumber != 0 && PlaceHereCemeteryPlotNumber != 0 && PlaceHerePrice != 0 && string.IsNullOrWhiteSpace(PlaceHereCemetaryAdress) == false);
 
             RemovePlace = new CommandVM(() =>
             {
@@ -85,7 +92,7 @@ namespace kkk1604.ViewModel
                 addplace.CemeterySectorNumber = PlaceHereCemeterySectorNumber;
                 PlacesDB.GetDb().Insert(addplace);
                 SelectAll();
-            }, () => PlaceHereCemetaryAdress != null && PlaceHereCemeterySectorNumber != 0 && PlaceHereCemeteryPlotNumber != 0 && PlaceHerePrice != 0);
+            }, () =>  PlaceHereCemeterySectorNumber != 0 && PlaceHereCemeteryPlotNumber != 0 && PlaceHerePrice != 0 && string.IsNullOrWhiteSpace(PlaceHereCemetaryAdress) == false);
 
 
         }

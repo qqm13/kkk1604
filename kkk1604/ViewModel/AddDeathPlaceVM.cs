@@ -141,12 +141,12 @@ namespace kkk1604.ViewModel
                 DeathPlaceHere.Coffin = SelectedCoffin;
                 DeathPlaceHere.Grave = SelectedGrave;
                 DeathPlaceHere.Flower = SelectedFlower;
-                DeathPlaceHere.Title = DeathPlaceHereTitle;
+                DeathPlaceHere.Title = DeathPlaceHere.Coffin.Title + " " + DeathPlaceHere.Grave.Title +  " " + DeathPlaceHere.Flower.Title;
                 DeathPlaceHere.Price = PriceHere;
 
                 DeathPlacesDB.GetDb().Update(DeathPlaceHere);
                 SelectAll();
-            }, () => DeathPlaceHere != null && SelectedCoffin != null && SelectedGrave != null && SelectedFlower != null && DeathPlaceHereTitle != null); 
+            }, () => DeathPlaceHere != null && SelectedCoffin != null && SelectedGrave != null && SelectedFlower != null); 
 
             RemoveDeathPlace = new CommandVM(() =>
             {
@@ -161,11 +161,11 @@ namespace kkk1604.ViewModel
                 deathPlaceAdd.Grave = SelectedGrave;
                 deathPlaceAdd.Flower = SelectedFlower;
                 deathPlaceAdd.Price = PriceHere;
-                deathPlaceAdd.Title = DeathPlaceHereTitle;
+                deathPlaceAdd.Title = deathPlaceAdd.Coffin.Title + " " + deathPlaceAdd.Grave.Title + " " + deathPlaceAdd.Flower.Title;
 
                 DeathPlacesDB.GetDb().Insert(deathPlaceAdd);
                 SelectAll();
-            }, () => SelectedCoffin != null && SelectedGrave != null && SelectedFlower != null && DeathPlaceHereTitle != null);
+            }, () => SelectedCoffin != null && SelectedGrave != null && SelectedFlower != null);
 
 
         }

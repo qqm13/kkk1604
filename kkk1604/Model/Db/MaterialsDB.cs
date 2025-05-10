@@ -25,10 +25,10 @@ namespace kkk1604.Model.Db
 
             if (connection.OpenConnection())
             {
-                MySqlCommand cmd = connection.CreateCommand("insert into `Materials` Values (0, @title, @price);select LAST_INSERT_ID();");
+                MySqlCommand cmd = connection.CreateCommand("insert into `Materials` Values (0, @title, @Price);select LAST_INSERT_ID();");
 
                 cmd.Parameters.Add(new MySqlParameter("title", material.Title));
-                cmd.Parameters.Add(new MySqlParameter("price", material.Price));
+                cmd.Parameters.Add(new MySqlParameter("PricePerSquareMeter", material.Price));
 
                 try
                 {
@@ -98,9 +98,9 @@ namespace kkk1604.Model.Db
             if (connection == null)
                 return result; if (connection.OpenConnection())
             {
-                var mc = connection.CreateCommand($"update `Materials` set `Title`=@title, `Price`=@price where `id` = {edit.Id}");
+                var mc = connection.CreateCommand($"update `Materials` set `Title`=@title, `Price`=@Price where `id` = {edit.Id}");
                 mc.Parameters.Add(new MySqlParameter("title", edit.Title));
-                mc.Parameters.Add(new MySqlParameter("price", edit.Price));
+                mc.Parameters.Add(new MySqlParameter("PricePerSquareMeter", edit.Price));
 
                 try
                 {

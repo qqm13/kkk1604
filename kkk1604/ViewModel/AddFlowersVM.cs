@@ -38,6 +38,13 @@ namespace kkk1604.ViewModel
                     FlowerHereCount = flowerHere.Price;
                     FlowerHerePrice = flowerHere.Count;
                 }
+                else
+                {
+
+                    FlowerHereTitle = "";
+                    FlowerHereCount = 0;
+                    FlowerHerePrice = 0;
+                }
                 Signal(); 
             } 
         }
@@ -61,7 +68,7 @@ namespace kkk1604.ViewModel
                 FlowerHere.Price = FlowerHerePrice;
                 FlowersDB.GetDb().Update(FlowerHere);
                 SelectAll();
-            }, () => FlowerHere != null && FlowerHereTitle != null && FlowerHereCount != 0 && FlowerHerePrice != 0);
+            }, () => FlowerHere != null && FlowerHereCount != 0 && FlowerHerePrice != 0 && string.IsNullOrWhiteSpace(FlowerHereTitle) == false);
 
             RemoveFlower = new CommandVM(() =>
             {
@@ -78,7 +85,7 @@ namespace kkk1604.ViewModel
 
                 FlowersDB.GetDb().Insert(flowerAdd);
                 SelectAll();
-            }, () => FlowerHereTitle != null && FlowerHereCount != 0 && FlowerHerePrice != 0);
+            }, () =>  FlowerHereCount != 0 && FlowerHerePrice != 0 && string.IsNullOrWhiteSpace(FlowerHereTitle) == false);
 
 
         }

@@ -48,7 +48,7 @@
             <TextBox Text="{Binding GuestCount}"/>
             <Label Content="Выберите" FontSize="15" Margin="20 6 0 0"/>
             <CheckBox Content="Некролог" Margin="18 7 0 0" FontSize="16" IsChecked="{Binding Necrolog}"/>
-            <CheckBox Content="Последний ужин" Margin="18 7 0 0" FontSize="16" IsChecked="{Binding LastDiner}"/>
+            <CheckBox Content="Последний ужин(кутья)" Margin="18 7 0 0" FontSize="16" IsChecked="{Binding LastDiner}"/>
             <CheckBox Content="Памятное видео" Margin="18 7 0 0" FontSize="16" IsChecked="{Binding LastVideo}"/>
             <CheckBox Content="Автобус для гостей" Margin="18 7 0 0" FontSize="16" IsChecked="{Binding GuestBus}"/>
             <CheckBox Content="Катафалк" Margin="18 7 0 0" FontSize="16" IsChecked="{Binding Catafalque}"/>
@@ -61,8 +61,6 @@
             <Label Content="Выберите шаблон" HorizontalAlignment="Center" Margin="0 10 0 0"  FontSize="15"/>
             <ComboBox ItemsSource="{Binding DeathPlaces}" DisplayMemberPath="Title" SelectedItem="{Binding SelectedDeathPlace}"/>
             <Label Content="Или настройте врунчую тип"  FontSize="15" HorizontalAlignment="Center"/>
-            <Label Content="Название" FontSize="15"/>
-            <TextBox Text="{Binding TitleCustomDeathPlace}"/>
             <Label Content="Тип гроба"  FontSize="15"/>
             <ComboBox ItemsSource="{Binding Coffins}" DisplayMemberPath="Title" SelectedItem="{Binding SelectedCoffin }"/>
             <Label Content="Тип памятника"  FontSize="15"/>
