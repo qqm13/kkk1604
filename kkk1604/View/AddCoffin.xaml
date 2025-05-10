@@ -35,6 +35,7 @@
             <ComboBox Height="35" FontSize="16" ItemsSource="{Binding Sizes}" SelectedItem="{Binding SelectedSize}"  DisplayMemberPath="Title"/>
             <Label Content="Цена" FontSize="16"/>
             <TextBox FontSize="16" Height="40" Text="{Binding PriceHere}"/>
+            <Label Content="Цена работы мастера:10000" FontSize="12"/>
             
         </StackPanel>
 

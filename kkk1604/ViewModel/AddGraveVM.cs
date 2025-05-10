@@ -129,7 +129,7 @@ namespace kkk1604.ViewModel
 
                 GravesDB.GetDb().Update(GraveHere);
                 SelectAll();
-            }, () => GraveHere != null && SelectedMaterial != null && SelectedForm != null );
+            }, () => GraveHere != null && SelectedMaterial != null && SelectedForm != null && PriceHere != 0);
 
             RemoveGrave = new CommandVM(() =>
             {
@@ -147,7 +147,7 @@ namespace kkk1604.ViewModel
 
                 GravesDB.GetDb().Insert(graveAdd);
                 SelectAll();
-            }, () =>  SelectedMaterial != null && SelectedForm != null);
+            }, () =>  SelectedMaterial != null && SelectedForm != null && PriceHere != 0);
 
 
         }
