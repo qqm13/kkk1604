@@ -47,7 +47,6 @@ namespace kkk1604.ViewModel
             Calculate = new CommandVM(() =>
             {
                 TotalPrice = 0;
-                TotalPrice += GuestCount * 150;
 
                 if (Necrolog == true)
                 {
