@@ -6,6 +6,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace kkk1604.ViewModel
 {
@@ -19,6 +20,16 @@ namespace kkk1604.ViewModel
         private int sector;
         private int plot;
         private string allPrice;
+        private int guestCount;
+        private bool necrolog = false;
+        private bool lastDiner = false;
+        private bool lastVideo = false;
+        private bool guestBus = false;
+        private bool catafalque = false;
+        private bool priest = false;
+        private Grave selectedGrave;
+        private Coffin selectedCoffin;
+        private Flower selectedFlower;
 
         public ObservableCollection<Grave> Graves { get; set; } = new ObservableCollection<Grave>();
         public ObservableCollection<Coffin> Coffins { get; set; } = new ObservableCollection<Coffin>();
@@ -28,17 +39,21 @@ namespace kkk1604.ViewModel
         public ObservableCollection<DeathPlace> DeathPlaces { get; set; } = new ObservableCollection<DeathPlace>();
 
 
-        public Grave SelectedGrave { get; set; }
-        public Coffin SelectedCoffin { get; set; }
-        public Flower SelectedFlower { get; set; }
+        public Grave SelectedGrave { get => selectedGrave; set { selectedGrave = value; Signal(); } }
+        public Coffin SelectedCoffin { get => selectedCoffin; set { selectedCoffin = value; Signal(); } }
+        public Flower SelectedFlower { get => selectedFlower; set { selectedFlower = value; Signal(); } }
         public Place SelectedPlace
         {
             get => selectedPlace;
             set
             {
                 selectedPlace = value;
-                Sector = selectedPlace.CemeterySectorNumber;
-                Plot = selectedPlace.CemeteryPlotNumber;
+                if(selectedPlace != null)
+                {
+                    Sector = selectedPlace.CemeterySectorNumber;
+                    Plot = selectedPlace.CemeteryPlotNumber;
+                }
+                Signal();
             }
         }
 
@@ -46,14 +61,13 @@ namespace kkk1604.ViewModel
 
         public int TotalPrice { get => totalPrice; set { totalPrice = value; Signal(); } }
 
-        public int GuestCount { get; set; }
-        public bool Necrolog { get; set; } = false;
-        public bool LastDiner { get; set; } = false;
-        public bool LastVideo { get; set; } = false;
-        public bool GuestBus { get; set; } = false;
-        public bool Catafalque { get; set; } = false;
-        public bool Priest { get; set; } = false;
-
+        public int GuestCount { get => guestCount; set { guestCount = value; Signal(); } }
+        public bool Necrolog { get => necrolog; set { necrolog = value; Signal(); } }
+        public bool LastDiner { get => lastDiner; set { lastDiner = value; Signal(); } }
+        public bool LastVideo { get => lastVideo; set { lastVideo = value; Signal(); } }
+        public bool GuestBus { get => guestBus; set { guestBus = value;  Signal(); } }
+        public bool Catafalque { get => catafalque; set { catafalque = value; Signal(); } }
+        public bool Priest { get => priest; set { priest = value; Signal(); } }
         public DateTime SelectedDate { get; set; } = DateTime.Now;
 
         public int Sector { get => sector; set { sector = value; Signal(); } }
@@ -69,7 +83,10 @@ namespace kkk1604.ViewModel
 
         public EditEventVM()
         {
+
+
             SelectAll();
+
             UpdateEvent = new CommandVM(() =>
             {
                 OrganizationUpdate.Date = SelectedDate;
@@ -165,7 +182,21 @@ namespace kkk1604.ViewModel
         internal void SetOrganization(Organization organization)
         {
             this.OrganizationUpdate = organization;
+            GuestCount = organization.GuestCount;
+            Necrolog = organization.Necrology;
+            LastDiner = organization.LastDinner;
+            LastVideo = organization.LastSlideshow;
+            GuestBus = organization.GuestBus;
+            Catafalque = organization.Catafalque;
+            Priest = organization.Priest;
+            SelectedDate = organization.Date;
+            SelectedPlace = organization.Place;
+            SelectedCoffin = organization.DeathPlace.Coffin;
+            SelectedGrave = organization.DeathPlace.Grave;
+            SelectedFlower = organization.DeathPlace.Flower;
         }
+
+     
 
         private void SelectAll()
         {

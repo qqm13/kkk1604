@@ -35,7 +35,7 @@
             <DatePicker SelectedDate="{Binding SelectedDate}"/>
             <Label Content="Выберите адрес"  FontSize="15"/>
             <Label Content="Адрес"  FontSize="15"/>
-            <ComboBox ItemsSource="{Binding Places}" DisplayMemberPath="CemetaryAdress" SelectedItem="{Binding SelectedPlace}"/>
+            <ComboBox ItemsSource="{Binding Places}" DisplayMemberPath="CemetaryAdress" SelectedItem="{Binding SelectedPlace}" />
             <StackPanel Orientation="Horizontal">
                 <Label Content="Сектор" Margin="0 0 10 0"/>
                 <Label Content="Участок" Margin="50 0 10 0"/>
