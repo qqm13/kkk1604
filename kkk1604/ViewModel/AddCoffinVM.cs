@@ -119,9 +119,6 @@ namespace kkk1604.ViewModel
 
                     int iwidth = Convert.ToInt32(width);
 
-                    int resultDNA = ilenght * iwidth;
-                    int resultDnaIKrishki = resultDNA * 2;
-
                     double height = selectedSize.Height;
                     height = height / 100;
                     if (height > Math.Round(height))
@@ -132,10 +129,8 @@ namespace kkk1604.ViewModel
 
                     int iheight = Convert.ToInt32(height);
 
-                    int resultSide = iheight * ilenght;
-                    int resultSides = resultSide * 2;
 
-                    int iresult = resultDnaIKrishki + resultSides;
+                    int iresult = iheight * iwidth * ilenght;
 
                     PriceHere = iresult * selectedMaterial.Price + MasterPrice;
                 }
@@ -178,9 +173,6 @@ namespace kkk1604.ViewModel
 
                     int iwidth = Convert.ToInt32(width);
 
-                    int resultDNA = ilenght * iwidth;
-                    int resultDnaIKrishki = resultDNA * 2;
-
                     double height = selectedSize.Height;
                     height = height / 100;
                     if (height > Math.Round(height))
@@ -191,10 +183,8 @@ namespace kkk1604.ViewModel
 
                     int iheight = Convert.ToInt32(height);
 
-                    int resultSide = iheight * ilenght;
-                    int resultSides = resultSide * 2;
 
-                    int iresult = resultDnaIKrishki + resultSides;
+                    int iresult = iheight * iwidth * ilenght;
 
                     PriceHere = iresult * selectedMaterial.Price + MasterPrice;
                 }

@@ -298,7 +298,7 @@ namespace kkk1604.ViewModel
                 sheetTwo.Range["O3"].BorderAround();
                 sheetTwo.Range["P3"].BorderAround();
 
-                sheetTwo.Range["S1"].Text = "Цвета";
+                sheetTwo.Range["S1"].Text = "Цветы";
                 sheetTwo.Range["S1:X1"].Merge();
                 sheetTwo.Range["S1:X1"].HorizontalAlignment = HorizontalAlignType.Center;
                 sheetTwo.Range["S1:X1"].BorderAround();
@@ -310,7 +310,7 @@ namespace kkk1604.ViewModel
 
                 sheetTwo.Range["S2"].Text = "Название";
                 sheetTwo.Range["S2"].BorderAround();
-                sheetTwo.Range["T2"].Text = "Количество в буете";
+                sheetTwo.Range["T2"].Text = "Количество в букете";
                 sheetTwo.Range["T2"].BorderAround();
                 sheetTwo.Range["U2"].Text = "Цена";
                 sheetTwo.Range["U2"].BorderAround();
@@ -324,12 +324,13 @@ namespace kkk1604.ViewModel
 
                 int flowercount = 0;
                 int flowerprice = 0;
+                List<Flower> flowers = FlowersDB.GetDb().SelectAll();
                 for (int i = 0; i < organizationsForReport.Count; i++)
                 {
-                    List<Flower> flowers = FlowersDB.GetDb().SelectAll();
+                
                     foreach (Flower flower in flowers)
                     {
-                        if (flower.Id == organizationsForReport[i].DeathPlace.Grave.Id)
+                        if (flower.Id == organizationsForReport[i].DeathPlace.Flower.Id)
                         {
                             sheetTwo.Range[$"S{i + 3}"].Text = flower.Title;
                             sheetTwo.Range[$"T{i + 3}"].Text = flower.Count.ToString();
