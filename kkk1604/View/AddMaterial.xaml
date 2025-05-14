@@ -30,7 +30,7 @@
         <StackPanel Grid.Row="1">
             <Label Content="Введите название" FontSize="16"/>
             <TextBox FontSize="16" Height="40" Text="{Binding MaterialHereTitle}"/>
-            <Label Content="Введите цену за квадратный метр" FontSize="16"/>
+            <Label Content="Введите цену за кубический метр" FontSize="16"/>
             <TextBox FontSize="16" Height="40" Text="{Binding MaterialHerePrice}"/>
         </StackPanel>
 
