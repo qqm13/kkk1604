@@ -14,7 +14,7 @@ namespace kkk1604.ViewModel
         public int MasterPrice { get; set; } = 15000;
 
         private ObservableCollection<Grave> graves = new ObservableCollection<Grave>();
-        private Grave graveHere { get; set; } = new Grave();
+        private Grave graveHere { get; set; } 
 
         private ObservableCollection<Material> materials = new ObservableCollection<Material>();
         public ObservableCollection<Material> Materials

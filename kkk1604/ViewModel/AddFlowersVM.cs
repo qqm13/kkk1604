@@ -12,7 +12,7 @@ namespace kkk1604.ViewModel
     class AddFlowersVM : BaseVM
     {
         private ObservableCollection<Flower> flowers = new ObservableCollection<Flower>();
-        private Flower flowerHere = new Flower();
+        private Flower flowerHere;
         private string flowerHereTitle;
         private int flowerHereCount;
         private int flowerHerePrice;
