@@ -46,7 +46,7 @@
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Названние" Width="200" DisplayMemberBinding="{Binding Title}"/>
-                    <GridViewColumn Header="Цена за квадратный метр"  Width="145" DisplayMemberBinding="{Binding Price}" />
+                    <GridViewColumn Header="Цена за кубический метр"  Width="145" DisplayMemberBinding="{Binding Price}" />
                 </GridView>
             </ListView.View>
         </ListView>
