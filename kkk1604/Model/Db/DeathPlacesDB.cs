@@ -8,7 +8,7 @@ using System.Windows;
 
 namespace kkk1604.Model.Db
 {
-    class DeathPlacesDB
+    public class DeathPlacesDB
     {
         DbConnection connection;
 

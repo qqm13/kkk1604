@@ -7,7 +7,7 @@ using System.Windows.Input;
 
 namespace kkk1604.ViewModel
 {
-    class CommandVM : ICommand
+   public class CommandVM : ICommand
     {
         Action action;
         Func<bool> canExecute;

@@ -15,7 +15,7 @@ using System.Windows;
 
 namespace kkk1604.ViewModel
 {
-    class MainVM : BaseVM
+   public class MainVM : BaseVM
     {
         private string dateCheckResult;
         private DateTime checkDate = DateTime.Now;
@@ -356,12 +356,6 @@ namespace kkk1604.ViewModel
 
 
 
-
-                //делать норм создание очтета летсгоу
-                //основана инфа о соыбтия 1первый лист +
-                //количсевто провыеденных событий 1первый лист +
-                //общий заработок 1первый лист +
-                //кратка инфа о  гробов,памятников,цветов + количество проданных того или иног овида плюс сколько заработали 2втопрой лист +
 
 
                 try
